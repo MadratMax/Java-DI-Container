@@ -1,22 +1,19 @@
-import testPackage.Test;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
-
-import static testPackage.Test.printTest;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
-	    LoggerTest loggerTest1 = new LoggerTest();
-        List<String> logger = new ArrayList<String>();
-        LoggerTest loggerTest2 = new LoggerTest();
 
-        Container container = new Container<Object>(4);
-        container.addInstance(loggerTest1);
-        container.addInstance(logger);
-        container.addInstance(loggerTest2);
-        container.addInstance(loggerTest2);
+        List<String> i1 = new ArrayList<String>();
+        Map<String, String> i2 = new HashMap<String, String>();
+        List<String> i3 = new ArrayList<String>();
+
+        Container container = new Container<Object>(3);
+        container.addInstance(i1);
+        container.addInstance(i2);
+        container.addInstance(i3);
     }
 }
