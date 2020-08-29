@@ -22,13 +22,11 @@ public class TypeSet{
                 newSet.add(instance);
                 this.typeDict.put(type, newSet);
             }
-            else
-            {
-                this.typeDict.get(type).add(instance);
-            }
 
             return true;
         }
+
+        this.typeDict.get(type).add(instance);
 
         return false;
     }

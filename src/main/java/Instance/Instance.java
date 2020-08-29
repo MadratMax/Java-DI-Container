@@ -1,6 +1,9 @@
 package Instance;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Instance<T> {
 
@@ -11,6 +14,7 @@ public class Instance<T> {
     private T instance;
     private Siblings siblings;
     private int priority;
+    private String date;
 
     public Instance(T instance){
         if(instance != null)
@@ -18,9 +22,18 @@ public class Instance<T> {
             this.id = instance.hashCode();
             this.type = instance.getClass();
             this.siblings = new Siblings();
+            this.date = new SimpleDateFormat("yyyyMMdd_HHmmssms").format(Calendar.getInstance().getTime());
         }
 
         this.instance = instance;
+    }
+
+    public String getName(){
+        return this.instance.getClass().toString();
+    }
+
+    public String getDate() {
+        return this.date;
     }
 
     public int getId(){
@@ -52,7 +65,22 @@ public class Instance<T> {
         this.siblings.addSibling(siblingInstance);
     }
 
-    public void decreasePriority(){
-        this.priority++;
+    public void setPriority(int priority){
+        this.priority = priority;
+    }
+
+    public int getPriority(){
+        return this.priority;
+    }
+
+    public boolean isExtends(Class requiredClass) {
+
+        Class interfaceImplemented = this.instance.getClass().getInterfaces()[0];
+
+            try {
+                return interfaceImplemented.equals(requiredClass);
+            } catch(Exception e) {}
+
+        return false;
     }
 }

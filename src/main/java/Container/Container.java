@@ -4,9 +4,11 @@ import Instance.Instance;
 import Types.TypeSet;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class Container <T>{
+public class Container <T> implements IContainer<T> {
 
     private Instance[] instances;
     private TypeSet typeSet;
@@ -38,12 +40,32 @@ public class Container <T>{
             this.setSiblingRelation(instanceType, newInstance);
     }
 
-    private void setSiblingRelation(Type type, Instance instance) {
+    public List<Instance> getInstancesByInterface(Class superClass){
+        List<Instance> instancesList = new ArrayList<Instance>();
+
         for (Instance i :
-                this.typeSet.getInstancesByType(type)) {
-            instance.addSibling(i);
-            this.instances[Arrays.asList(this.instances).indexOf(i)].addSibling(instance);
-            instance.decreasePriority();
+                this.instances) {
+            if(i.isExtends(superClass)){
+                instancesList.add(i);
+            }
+        }
+
+        return instancesList;
+    }
+
+    public List<Instance> getInstancesByClassName(Class instanceClass){
+        return this.typeSet.getInstancesByType(instanceClass);
+    }
+
+    private void setSiblingRelation(Type type, Instance newInstance) {
+        int priority = 0;
+        List<Instance> instances = this.typeSet.getInstancesByType(type);
+
+        for (Instance i :
+                instances) {
+            newInstance.addSibling(i);
+            this.instances[Arrays.asList(this.instances).indexOf(i)].addSibling(newInstance);
+            newInstance.setPriority(priority++);
         }
     }
 }
