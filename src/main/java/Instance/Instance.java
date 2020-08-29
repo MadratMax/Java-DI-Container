@@ -3,7 +3,6 @@ package Instance;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Instance<T> {
 
@@ -15,6 +14,7 @@ public class Instance<T> {
     private Siblings siblings;
     private int priority;
     private String date;
+    private String tag;
 
     public Instance(T instance){
         if(instance != null)
@@ -23,6 +23,7 @@ public class Instance<T> {
             this.type = instance.getClass();
             this.siblings = new Siblings();
             this.date = new SimpleDateFormat("yyyyMMdd_HHmmssms").format(Calendar.getInstance().getTime());
+            this.tag = Integer.toString(this.id);
         }
 
         this.instance = instance;
@@ -36,12 +37,22 @@ public class Instance<T> {
         return this.date;
     }
 
+    public String getTag() {
+        if(this.priority == 0)
+            return "major";
+
+        return this.tag;
+    }
+
+    public int getPriority(){
+        return this.priority;
+    }
+
     public int getId(){
         return this.id;
     }
 
     public boolean isInvoked(){
-        this.invokeCount++;
         return this.isInvoked;
     }
 
@@ -53,7 +64,9 @@ public class Instance<T> {
         return this.type;
     }
 
-    public T getInstance(){
+    public T get(){
+        this.invokeCount++;
+        isInvoked = true;
         return this.instance;
     }
 
@@ -69,8 +82,8 @@ public class Instance<T> {
         this.priority = priority;
     }
 
-    public int getPriority(){
-        return this.priority;
+    public void setTag(String tag){
+        this.tag = tag;
     }
 
     public boolean isExtends(Class requiredClass) {
