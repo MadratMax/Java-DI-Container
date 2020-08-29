@@ -23,7 +23,7 @@ public class Instance<T> {
             this.type = instance.getClass();
             this.siblings = new Siblings();
             this.date = new SimpleDateFormat("yyyyMMdd_HHmmssms").format(Calendar.getInstance().getTime());
-            this.tag = Integer.toString(this.id);
+            this.tag = Integer.toString(this.priority);
         }
 
         this.instance = instance;
@@ -80,20 +80,16 @@ public class Instance<T> {
 
     public void setPriority(int priority){
         this.priority = priority;
+        setTag(Integer.toString(this.priority));
     }
 
     public void setTag(String tag){
         this.tag = tag;
     }
 
-    public boolean isExtends(Class requiredClass) {
+    public boolean isImplementsInterface(Class iFace) {
 
         Class interfaceImplemented = this.instance.getClass().getInterfaces()[0];
-
-            try {
-                return interfaceImplemented.equals(requiredClass);
-            } catch(Exception e) {}
-
-        return false;
+        return interfaceImplemented.equals(iFace);
     }
 }

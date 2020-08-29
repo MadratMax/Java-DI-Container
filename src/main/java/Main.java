@@ -22,8 +22,8 @@ public class Main<T> {
         container.addInstance(c);
         container.addInstance(c);
         container.addInstance(c);
-        Class[] superClassType = c.getClass().getInterfaces();
-        List<Instance> instancesByInterface = container.getInstancesByInterface(superClassType[0]);
+        Class iFace = c.getClass().getInterfaces()[0];
+        List<Instance> instancesByInterface = container.getInstancesByInterface(iFace);
 
         for (Instance i :
                 instancesByInterface) {

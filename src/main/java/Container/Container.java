@@ -40,12 +40,12 @@ public class Container <T> implements IContainer<T> {
             this.setSiblingRelation(instanceType, newInstance);
     }
 
-    public List<Instance> getInstancesByInterface(Class superClass){
+    public List<Instance> getInstancesByInterface(Class iFace){
         List<Instance> instancesList = new ArrayList<Instance>();
 
         for (Instance i :
                 this.instances) {
-            if(i.isExtends(superClass)){
+            if(i.isImplementsInterface(iFace)){
                 instancesList.add(i);
             }
         }
@@ -63,8 +63,10 @@ public class Container <T> implements IContainer<T> {
 
         for (Instance i :
                 instances) {
-            newInstance.addSibling(i);
-            this.instances[Arrays.asList(this.instances).indexOf(i)].addSibling(newInstance);
+            if(!newInstance.equals(i))
+                newInstance.addSibling(i);
+            if(!this.instances[Arrays.asList(this.instances).indexOf(i)].equals(newInstance))
+                this.instances[Arrays.asList(this.instances).indexOf(i)].addSibling(newInstance);
             newInstance.setPriority(priority++);
         }
     }
