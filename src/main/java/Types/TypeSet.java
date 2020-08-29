@@ -1,4 +1,7 @@
-import java.lang.reflect.Array;
+package Types;
+
+import Instance.Instance;
+
 import java.lang.reflect.Type;
 import java.util.*;
 

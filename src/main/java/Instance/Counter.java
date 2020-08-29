@@ -1,3 +1,4 @@
+package Instance;
 
 public class Counter {
     private int creatingAttempt;

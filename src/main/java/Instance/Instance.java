@@ -1,3 +1,5 @@
+package Instance;
+
 import java.lang.reflect.Type;
 
 public class Instance<T> {
