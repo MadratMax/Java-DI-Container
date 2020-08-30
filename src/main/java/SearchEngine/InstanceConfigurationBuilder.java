@@ -1,6 +1,8 @@
 package SearchEngine;
 
 import Instance.Instance;
+
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -36,7 +38,17 @@ public class InstanceConfigurationBuilder {
     }
 
     public InstanceConfigurationBuilder byName(String name){
-        this.instance = (Instance) stream.filter(x -> ((Instance) x).getName() == name).findFirst().orElse(null);
+        this.instance = (Instance) stream.filter(x -> ((Instance) x).getName().equals(name)).findFirst().orElse(null);
+        return this;
+    }
+
+    public InstanceConfigurationBuilder byType(Type type){
+        this.instance = (Instance) stream.filter(x -> ((Instance) x).getType().equals(type)).findFirst().orElse(null);
+        return this;
+    }
+
+    public InstanceConfigurationBuilder byHighPriority(){
+        this.instance = this.byId(0).instance;
         return this;
     }
 }

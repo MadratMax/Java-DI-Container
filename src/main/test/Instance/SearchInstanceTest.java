@@ -75,6 +75,23 @@ public class SearchInstanceTest {
     }
 
     @Test
+    public void searchInClassRangeByType(){
+        List<String> i1 = new ArrayList<String>();
+        Map<String, String> i2 = new HashMap<String, String>();
+        List<String> i3 = new ArrayList<String>();
+
+        this.container.addInstance(i1);
+        this.container.addInstance(i2);
+        this.container.addInstance(i3);
+
+        Class instClass = i3.getClass();
+
+        List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
+        Instance iByType = Find.in(instancesByClass).by().type(instClass).getInstance();
+        assertEquals(instClass, iByType.getType(), "expected type: " + instClass + " , but was: " + iByType.getType());
+    }
+
+    @Test
     public void searchInInterfaceRangeById(){
         List<String> i1 = new ArrayList<String>();
         Map<String, String> i2 = new HashMap<String, String>();

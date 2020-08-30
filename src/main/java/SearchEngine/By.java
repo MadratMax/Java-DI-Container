@@ -1,5 +1,7 @@
 package SearchEngine;
 
+import java.lang.reflect.Type;
+
 public class By {
 
     private final InstanceConfigurationBuilder builder;
@@ -34,6 +36,14 @@ public class By {
 
         public InstanceConfigurationBuilder name(String name){
             return this.builder.byName(name);
+        }
+
+        public InstanceConfigurationBuilder type(Type type){
+            return this.builder.byType(type);
+        }
+
+        public InstanceConfigurationBuilder highPriority(){
+            return this.builder.byHighPriority();
         }
     }
 }
