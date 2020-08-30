@@ -30,7 +30,7 @@ public class Main<T> {
             System.out.println(i.getName() + " priority: " + i.getPriority() + " date: " + i.getDate());
         }
 
-        List<Instance> instancesByClass = container.getInstancesByClassName(i3.getClass());
+        List<Instance> instancesByClass = container.getInstancesByClass(i3.getClass());
 
         for (Instance i :
                 instancesByClass) {

@@ -22,9 +22,6 @@ public class InstanceManager <T> {
     }
 
     public void addInstance(T instance){
-        if(this.lastAddedIndex == this.container.getSize())
-            throw new ArrayIndexOutOfBoundsException("Exceeded Container size: " + this.container.getSize());
-
         Instance<T> newInstance = new Instance<T>(instance);
         this.instances[lastAddedIndex] = newInstance;
         Type instanceType = this.instances[lastAddedIndex].getType();

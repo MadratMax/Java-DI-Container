@@ -10,5 +10,5 @@ public interface IContainer <T> {
     int getSize();
     void addInstance(T instance);
     List<Instance> getInstancesByInterface(Class superClass);
-    List<Instance> getInstancesByClassName(Class instanceClass);
+    List<Instance> getInstancesByClass(Class instanceClass);
 }
