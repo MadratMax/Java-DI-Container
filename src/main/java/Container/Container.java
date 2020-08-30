@@ -1,25 +1,18 @@
 package Container;
 
 import Instance.Instance;
-import Types.TypeSet;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
+import Instance.InstanceManager;
 import java.util.List;
 
 public class Container <T> implements IContainer<T> {
 
-    private Instance[] instances;
-    private TypeSet typeSet;
     private int containerSize;
-    private int lastAddedIndex;
+    private InstanceManager<T> instanceManager;
+
 
     public Container(int size){
         this.containerSize = size;
-        this.instances = new Instance[size];
-
-        this.typeSet = new TypeSet();
+        this.instanceManager = new InstanceManager<T>(this);
     }
 
     public int getSize(){
@@ -27,47 +20,14 @@ public class Container <T> implements IContainer<T> {
     }
 
     public void addInstance(T instance){
-        if(this.lastAddedIndex == containerSize)
-            throw new ArrayIndexOutOfBoundsException("Exceeded Container size: " + this.containerSize);
-
-        Instance<T> newInstance = new Instance<T>(instance);
-        this.instances[lastAddedIndex] = newInstance;
-        Type instanceType = this.instances[lastAddedIndex].getType();
-        boolean typeAdded = this.typeSet.addType(instanceType, newInstance);
-        lastAddedIndex++;
-
-        if(!typeAdded)
-            this.setSiblingRelation(instanceType, newInstance);
+        this.instanceManager.addInstance(instance);
     }
 
     public List<Instance> getInstancesByInterface(Class iFace){
-        List<Instance> instancesList = new ArrayList<Instance>();
-
-        for (Instance i :
-                this.instances) {
-            if(i.isImplementsInterface(iFace)){
-                instancesList.add(i);
-            }
-        }
-
-        return instancesList;
+        return this.instanceManager.getInstancesByInterface(iFace);
     }
 
     public List<Instance> getInstancesByClassName(Class instanceClass){
-        return this.typeSet.getInstancesByType(instanceClass);
-    }
-
-    private void setSiblingRelation(Type type, Instance newInstance) {
-        int priority = 0;
-        List<Instance> instances = this.typeSet.getInstancesByType(type);
-
-        for (Instance i :
-                instances) {
-            if(!newInstance.equals(i))
-                newInstance.addSibling(i);
-            if(!this.instances[Arrays.asList(this.instances).indexOf(i)].equals(newInstance))
-                this.instances[Arrays.asList(this.instances).indexOf(i)].addSibling(newInstance);
-            newInstance.setPriority(priority++);
-        }
+        return this.instanceManager.getInstancesByClassName(instanceClass);
     }
 }
