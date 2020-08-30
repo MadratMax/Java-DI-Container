@@ -36,7 +36,7 @@ public class SearchInstanceTest {
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
 
         Instance iByTag = Find.in(instancesByClass).by().tag("new-tag").getInstance();
-        assertNotNull(iByTag, "failed to find getInstance by tag");
+        assertNotNull(iByTag, "failed to find instance by tag");
     }
 
     @Test
@@ -51,7 +51,7 @@ public class SearchInstanceTest {
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
         Instance iByPriority = Find.in(instancesByClass).by().priority(0).getInstance();
-        assertNotNull(iByPriority, "failed to find getInstance by priority");
+        assertNotNull(iByPriority, "failed to find instance by priority");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class SearchInstanceTest {
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
         Instance iById = Find.in(instancesByClass).by().id(3232).getInstance();
-        assertNotNull(iById, "failed to find getInstance by id");
+        assertNotNull(iById, "failed to find instance by id");
     }
 
     @Test
@@ -108,6 +108,6 @@ public class SearchInstanceTest {
         i.setId(3232);
 
         Instance iById = Find.in(instancesByInterface).by().id(3232).getInstance();
-        assertNotNull(iById, "failed to find getInstance by id");
+        assertNotNull(iById, "failed to find instance by id");
     }
 }

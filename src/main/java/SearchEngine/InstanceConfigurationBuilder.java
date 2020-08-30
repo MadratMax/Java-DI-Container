@@ -48,7 +48,7 @@ public class InstanceConfigurationBuilder {
     }
 
     public InstanceConfigurationBuilder byHighPriority(){
-        this.instance = this.byId(0).instance;
+        this.instance = this.byPriority(0).instance;
         return this;
     }
 }

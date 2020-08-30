@@ -74,10 +74,6 @@ public class Instance<T> {
         this.id = id;
     }
 
-    public void addSibling(Instance siblingInstance){
-        this.siblings.addSibling(siblingInstance);
-    }
-
     public void setPriority(int priority){
         this.priority = priority;
         setTag(Integer.toString(this.priority));
@@ -91,5 +87,13 @@ public class Instance<T> {
 
         Class interfaceImplemented = this.instance.getClass().getInterfaces()[0];
         return interfaceImplemented.equals(iFace);
+    }
+
+    public void addSibling(Instance siblingInstance){
+        this.siblings.addSibling(siblingInstance);
+    }
+
+    public Siblings getSiblings(){
+        return this.siblings;
     }
 }
