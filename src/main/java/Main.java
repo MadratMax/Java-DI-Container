@@ -1,5 +1,7 @@
 import Container.Container;
 import Instance.Instance;
+import SearchEngine.Find;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,5 +38,9 @@ public class Main<T> {
                 instancesByClass) {
             System.out.println(i.getName() + " priority: " + i.getPriority() + " date: " + i.getDate());
         }
+
+        Instance iByTag = Find.in(instancesByClass).by().tag("21").getInstance();
+        Instance iByPriority = Find.in(instancesByClass).by().priority(0).getInstance();
+        Instance iById = Find.in(instancesByInterface).by().id(640070680).getInstance();
     }
 }

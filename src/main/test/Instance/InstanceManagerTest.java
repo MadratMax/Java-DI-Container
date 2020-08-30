@@ -26,7 +26,7 @@ class InstanceManagerTest {
 
         Class instClass = list.getClass();
         Instance i = (Instance) Arrays.stream(this.container.getInstancesByClass(instClass).toArray()).findFirst().get();
-        assertTrue(i.getType().equals(instClass), "expected instance type is List<String>, but was: " + i.getType());
+        assertTrue(i.getType().equals(instClass), "expected getInstance type is List<String>, but was: " + i.getType());
     }
 
     @Test
@@ -42,5 +42,20 @@ class InstanceManagerTest {
 
         assertTrue(i.getPriority() == 0, "expected priority: 0, but was: " + i.getPriority());
         assertTrue(i2.getPriority() == 1, "expected priority: 1, but was: " + i2.getPriority());
+    }
+
+    @Test
+    void setTag() {
+        List<String> list = new ArrayList<>();
+        List<String> list2 = new ArrayList<>();
+        this.container.addInstance(list);
+        this.container.addInstance(list2);
+
+        Class instClass = list.getClass();
+        Instance i = (Instance) Arrays.stream(this.container.getInstancesByClass(instClass).toArray()).findFirst().orElse(null);
+        Instance i2 = (Instance) Arrays.stream(this.container.getInstancesByClass(instClass).toArray()).reduce((a, b) -> b).orElse(null);
+        i2.setTag("new-tag");
+
+        assertTrue(i2.getTag().equals("new-tag"), "expected updated tag name: new-tag, but was: " + i.getTag());
     }
 }
