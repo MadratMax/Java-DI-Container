@@ -33,12 +33,11 @@ public class InstanceManager <T> {
     }
 
     public List<Instance> getInstancesByInterface(Class iFace){
-        List<Instance> instancesList = new ArrayList<Instance>();
+        List<Instance> instancesList = new ArrayList<>();
 
-        for (Instance i :
-                this.instances) {
-            if(i.isImplementsInterface(iFace)){
-                instancesList.add(i);
+        for (int i = 0; i < this.lastAddedIndex; i++) {
+            if(this.instances[i].isImplementsInterface(iFace)){
+                instancesList.add(this.instances[i]);
             }
         }
 

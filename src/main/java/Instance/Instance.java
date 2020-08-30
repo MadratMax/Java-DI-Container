@@ -2,7 +2,9 @@ package Instance;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Instance<T> {
 
@@ -75,7 +77,11 @@ public class Instance<T> {
     }
 
     public void setPriority(int priority){
+        if(this.priority == priority)
+            return;
+
         this.priority = priority;
+        //this.siblings.updatePriority(priority);
         setTag(Integer.toString(this.priority));
     }
 
@@ -93,7 +99,11 @@ public class Instance<T> {
         this.siblings.addSibling(siblingInstance);
     }
 
-    public Siblings getSiblings(){
-        return this.siblings;
+    public ArrayList<Instance> getSiblings(){
+        return this.siblings.get();
+    }
+
+    public int getSiblingCount(){
+        return this.siblings.getCount();
     }
 }

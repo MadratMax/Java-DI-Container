@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SiblingsTest {
 
-    private final IContainer container;
+    private final IContainer<Object> container;
     private final InstanceManager instanceManager;
 
     public SiblingsTest(){
-        this.container = new Container(4);
+        this.container = new Container<>(4);
         this.instanceManager = new InstanceManager(this.container);
     }
 
@@ -36,8 +36,8 @@ public class SiblingsTest {
         List<Instance> instancesByClass = this.container.getInstancesByClass(instClass);
         Instance iByType = Find.in(instancesByClass).by().highPriority().instance();
 
-        Siblings siblings = iByType.getSiblings();
+        ArrayList siblings = iByType.getSiblings();
         assertNotNull(siblings, "failed to extract siblings");
-        assertTrue(siblings.getCount() == 2, "expected siblings count: 2, but was " + siblings.getCount());
+        assertTrue(siblings.size() == 2, "expected siblings count: 2, but was " + siblings.size());
     }
 }

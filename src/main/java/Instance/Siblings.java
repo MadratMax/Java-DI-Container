@@ -3,13 +3,13 @@ package Instance;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Siblings <Instance>{
+public class Siblings{
 
-    private List<Instance> siblings;
+    private ArrayList<Instance> siblings;
     private int count;
 
     public Siblings(){
-        this.siblings = new ArrayList<Instance>();
+        this.siblings = new ArrayList<>();
     }
 
     public void addSibling(Instance siblingInstance){
@@ -19,7 +19,15 @@ public class Siblings <Instance>{
             this.count++;
     }
 
+    public ArrayList<Instance> get(){
+        return this.siblings;
+    }
+
     public int getCount(){
         return this.count;
+    }
+
+    public void updatePriority(int priority){
+        Configurator.updatePriority(this.siblings, priority);
     }
 }

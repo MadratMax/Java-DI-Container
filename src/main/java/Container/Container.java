@@ -5,6 +5,7 @@ import Instance.InstanceManager;
 import SearchEngine.Find;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Container <T> implements IContainer<T> {
@@ -31,10 +32,16 @@ public class Container <T> implements IContainer<T> {
         instancesAdded++;
     }
 
-    public T extract(Class<T> classType){
+    public T extract(Class<T> interfaceType){
 
-        List<Instance> instancesByIFace = this.getInstancesByInterface(classType);
-        return (T) Find.in(instancesByIFace).by().priority(0).instance().get();
+        List<Instance> instancesByIFace = this.getInstancesByInterface(interfaceType);
+        T i = (T) Find.in(instancesByIFace).by().priority(0).instance().get();
+
+        if(Arrays.stream(i.getClass().getInterfaces()).anyMatch(x -> x.equals(interfaceType))) {
+            return i;
+        }
+
+        return null;
     }
 
     public List<T> extractAll(Class<T> classType){
