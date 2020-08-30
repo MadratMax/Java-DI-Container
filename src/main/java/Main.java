@@ -1,46 +1,43 @@
 import Container.Container;
-import Instance.Instance;
+import Container.IContainer;
 import SearchEngine.Find;
+import TestData.DifLogger;
+import TestData.ILogger;
+import TestData.Logger;
+import Instance.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Main<T> {
 
     public static void main(String[] args) {
 
-        Container c = new Container(1);
-        List<String> i1 = new ArrayList<String>();
-        Map<String, String> i2 = new HashMap<String, String>();
-        List<String> i3 = new ArrayList<String>();
-
-        Container container = new Container<Object>(6);
-        container.addInstance(i1);
-        container.addInstance(i2);
-        container.addInstance(i3);
-
-        container.addInstance(c);
-        container.addInstance(c);
-        container.addInstance(c);
-        Class iFace = c.getClass().getInterfaces()[0];
-        List<Instance> instancesByInterface = container.getInstancesByInterface(iFace);
-
-        for (Instance i :
-                instancesByInterface) {
-            System.out.println(i.getName() + " priority: " + i.getPriority() + " date: " + i.getDate());
-        }
-
-        List<Instance> instancesByClass = container.getInstancesByClass(i3.getClass());
-
-        for (Instance i :
-                instancesByClass) {
-            System.out.println(i.getName() + " priority: " + i.getPriority() + " date: " + i.getDate());
-        }
-
-        Instance iByTag = Find.in(instancesByClass).by().tag("21").getInstance();
-        Instance iByPriority = Find.in(instancesByClass).by().priority(0).getInstance();
-        Instance iById = Find.in(instancesByInterface).by().id(640070680).getInstance();
+        containerExamples();
     }
+
+    private static void containerExamples() {
+        ILogger l1 = new Logger("1 logger");
+        ILogger l2 = new Logger("2 logger");
+        ILogger l3 = new Logger("3 logger");
+        ILogger l4 = new Logger("4 logger");
+        ILogger difL5 = new DifLogger();
+
+        IContainer container = new Container(5);
+        container.registerInstance(l2);
+        container.registerInstance(l3);
+        container.registerInstance(l4);
+        container.registerInstance(difL5);
+        container.registerInstance(l1);
+
+        Instance i = Find.in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance();
+        //i.setPriority(5);
+
+        List<ILogger> all = container.extractAll(ILogger.class);
+
+        Logger l = (Logger) container.extract(ILogger.class);
+
+        l.write();
+    }
+
+
 }

@@ -10,27 +10,27 @@ public class Instance<T> {
     private boolean isInvoked;
     private int invokeCount;
     private Type type;
-    private T instance;
+    private T coreInstance;
     private Siblings siblings;
     private int priority;
     private String date;
     private String tag;
 
-    public Instance(T instance){
-        if(instance != null)
+    public Instance(T coreInstance){
+        if(coreInstance != null)
         {
-            this.id = instance.hashCode();
-            this.type = instance.getClass();
+            this.id = coreInstance.hashCode();
+            this.type = coreInstance.getClass();
             this.siblings = new Siblings();
             this.date = new SimpleDateFormat("yyyyMMdd_HHmmssms").format(Calendar.getInstance().getTime());
             this.tag = Integer.toString(this.priority);
         }
 
-        this.instance = instance;
+        this.coreInstance = coreInstance;
     }
 
     public String getName(){
-        return this.instance.getClass().toString();
+        return this.coreInstance.getClass().toString();
     }
 
     public String getDate() {
@@ -67,7 +67,7 @@ public class Instance<T> {
     public T get(){
         this.invokeCount++;
         isInvoked = true;
-        return this.instance;
+        return this.coreInstance;
     }
 
     public void setId(int id){
@@ -85,7 +85,7 @@ public class Instance<T> {
 
     public boolean isImplementsInterface(Class iFace) {
 
-        Class interfaceImplemented = this.instance.getClass().getInterfaces()[0];
+        Class interfaceImplemented = this.coreInstance.getClass().getInterfaces()[0];
         return interfaceImplemented.equals(iFace);
     }
 

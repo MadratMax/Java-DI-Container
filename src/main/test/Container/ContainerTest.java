@@ -29,7 +29,7 @@ class ContainerTest {
     @Test
     void addInstance() {
         String str = new String();
-        this.container.addInstance(str);
+        this.container.registerInstance(str);
         int instanceCount = this.container.getInstancesByClass(str.getClass()).toArray().length;
         assertTrue(
                 instanceCount == 1,
@@ -40,8 +40,8 @@ class ContainerTest {
     void getInstancesByInterface() {
         IContainer container1 = new Container(1);
         IContainer container2 = new Container(2);
-        this.container.addInstance(container1);
-        this.container.addInstance(container2);
+        this.container.registerInstance(container1);
+        this.container.registerInstance(container2);
         Class iFace = container1.getClass().getInterfaces()[0];
         List<Instance> instancesByIFace = this.container.getInstancesByInterface(iFace);
 
@@ -61,8 +61,8 @@ class ContainerTest {
     void getInstancesByClassName() {
         String str = new String();
         String str2 = new String();
-        this.container.addInstance(str);
-        this.container.addInstance(str2);
+        this.container.registerInstance(str);
+        this.container.registerInstance(str2);
         List<Instance> instancesByClass = this.container.getInstancesByClass(str.getClass());
 
         for (Instance i :
@@ -81,9 +81,9 @@ class ContainerTest {
     void exceptionWhenContainerSizeExceeded(){
         String str = new String();
         String str2 = new String();
-        this.container.addInstance(str);
-        this.container.addInstance(str2);
+        this.container.registerInstance(str);
+        this.container.registerInstance(str2);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> this.container.addInstance(str2));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.container.registerInstance(str2));
     }
 }

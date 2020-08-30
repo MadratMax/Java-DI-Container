@@ -24,9 +24,9 @@ public class SearchInstanceTest {
         Map<String, String> i2 = new HashMap<String, String>();
         List<String> i3 = new ArrayList<String>();
 
-        this.container.addInstance(i1);
-        this.container.addInstance(i2);
-        this.container.addInstance(i3);
+        this.container.registerInstance(i1);
+        this.container.registerInstance(i2);
+        this.container.registerInstance(i3);
 
         Class instClass = i3.getClass();
 
@@ -35,7 +35,7 @@ public class SearchInstanceTest {
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
 
-        Instance iByTag = Find.in(instancesByClass).by().tag("new-tag").getInstance();
+        Instance iByTag = Find.in(instancesByClass).by().tag("new-tag").instance();
         assertNotNull(iByTag, "failed to find instance by tag");
     }
 
@@ -45,12 +45,12 @@ public class SearchInstanceTest {
         Map<String, String> i2 = new HashMap<String, String>();
         List<String> i3 = new ArrayList<String>();
 
-        this.container.addInstance(i1);
-        this.container.addInstance(i2);
-        this.container.addInstance(i3);
+        this.container.registerInstance(i1);
+        this.container.registerInstance(i2);
+        this.container.registerInstance(i3);
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
-        Instance iByPriority = Find.in(instancesByClass).by().priority(0).getInstance();
+        Instance iByPriority = Find.in(instancesByClass).by().priority(0).instance();
         assertNotNull(iByPriority, "failed to find instance by priority");
     }
 
@@ -60,9 +60,9 @@ public class SearchInstanceTest {
         Map<String, String> i2 = new HashMap<String, String>();
         List<String> i3 = new ArrayList<String>();
 
-        this.container.addInstance(i1);
-        this.container.addInstance(i2);
-        this.container.addInstance(i3);
+        this.container.registerInstance(i1);
+        this.container.registerInstance(i2);
+        this.container.registerInstance(i3);
 
         Class instClass = i3.getClass();
 
@@ -70,7 +70,7 @@ public class SearchInstanceTest {
         i.setId(3232);
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
-        Instance iById = Find.in(instancesByClass).by().id(3232).getInstance();
+        Instance iById = Find.in(instancesByClass).by().id(3232).instance();
         assertNotNull(iById, "failed to find instance by id");
     }
 
@@ -80,14 +80,14 @@ public class SearchInstanceTest {
         Map<String, String> i2 = new HashMap<String, String>();
         List<String> i3 = new ArrayList<String>();
 
-        this.container.addInstance(i1);
-        this.container.addInstance(i2);
-        this.container.addInstance(i3);
+        this.container.registerInstance(i1);
+        this.container.registerInstance(i2);
+        this.container.registerInstance(i3);
 
         Class instClass = i3.getClass();
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
-        Instance iByType = Find.in(instancesByClass).by().type(instClass).getInstance();
+        Instance iByType = Find.in(instancesByClass).by().type(instClass).instance();
         assertEquals(instClass, iByType.getType(), "expected type: " + instClass + " , but was: " + iByType.getType());
     }
 
@@ -97,9 +97,9 @@ public class SearchInstanceTest {
         Map<String, String> i2 = new HashMap<String, String>();
         List<String> i3 = new ArrayList<String>();
 
-        this.container.addInstance(i1);
-        this.container.addInstance(i2);
-        this.container.addInstance(i3);
+        this.container.registerInstance(i1);
+        this.container.registerInstance(i2);
+        this.container.registerInstance(i3);
 
         Class iFace = i2.getClass().getInterfaces()[0];
         List<Instance> instancesByInterface = this.container.getInstancesByInterface(iFace);
@@ -107,7 +107,7 @@ public class SearchInstanceTest {
         Instance i = (Instance) Arrays.stream(this.container.getInstancesByInterface(iFace).toArray()).reduce((a, b) -> b).orElse(null);
         i.setId(3232);
 
-        Instance iById = Find.in(instancesByInterface).by().id(3232).getInstance();
+        Instance iById = Find.in(instancesByInterface).by().id(3232).instance();
         assertNotNull(iById, "failed to find instance by id");
     }
 }

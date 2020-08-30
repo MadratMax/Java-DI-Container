@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public class InstanceConfigurationBuilder {
 
     private final List<Instance> instances;
-    private Instance instance;
+    private Instance _instance;
     private final Stream<Object> stream;
 
     public InstanceConfigurationBuilder(List<Instance> instances){
@@ -18,37 +18,37 @@ public class InstanceConfigurationBuilder {
         stream = Arrays.stream(this.instances.toArray());
     }
 
-    public Instance getInstance(){
-        return this.instance;
+    public Instance instance(){
+        return this._instance;
     }
 
     public InstanceConfigurationBuilder byTag(String tag){
-        this.instance = (Instance) stream.filter(x -> ((Instance) x).getTag().equals(tag)).findFirst().orElse(null);
+        this._instance = (Instance) stream.filter(x -> ((Instance) x).getTag().equals(tag)).findFirst().orElse(null);
         return this;
     }
 
     public InstanceConfigurationBuilder byPriority(int priority){
-        this.instance = (Instance) stream.filter(x -> ((Instance) x).getPriority() == priority).findFirst().orElse(null);
+        this._instance = (Instance) stream.filter(x -> ((Instance) x).getPriority() == priority).findFirst().orElse(null);
         return this;
     }
 
     public InstanceConfigurationBuilder byId(int id){
-        this.instance = (Instance) stream.filter(x -> ((Instance) x).getId() == id).findFirst().orElse(null);
+        this._instance = (Instance) stream.filter(x -> ((Instance) x).getId() == id).findFirst().orElse(null);
         return this;
     }
 
     public InstanceConfigurationBuilder byName(String name){
-        this.instance = (Instance) stream.filter(x -> ((Instance) x).getName().equals(name)).findFirst().orElse(null);
+        this._instance = (Instance) stream.filter(x -> ((Instance) x).getName().equals(name)).findFirst().orElse(null);
         return this;
     }
 
     public InstanceConfigurationBuilder byType(Type type){
-        this.instance = (Instance) stream.filter(x -> ((Instance) x).getType().equals(type)).findFirst().orElse(null);
+        this._instance = (Instance) stream.filter(x -> ((Instance) x).getType().equals(type)).findFirst().orElse(null);
         return this;
     }
 
     public InstanceConfigurationBuilder byHighPriority(){
-        this.instance = this.byPriority(0).instance;
+        this._instance = this.byPriority(0)._instance;
         return this;
     }
 }

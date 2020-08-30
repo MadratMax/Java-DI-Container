@@ -27,17 +27,17 @@ public class SiblingsTest {
         List<String> i3 = new ArrayList<String>();
         List<String> i4 = new ArrayList<String>();
 
-        this.container.addInstance(i1);
-        this.container.addInstance(i2);
-        this.container.addInstance(i3);
-        this.container.addInstance(i4);
+        this.container.registerInstance(i1);
+        this.container.registerInstance(i2);
+        this.container.registerInstance(i3);
+        this.container.registerInstance(i4);
 
         Class instClass = i3.getClass();
         List<Instance> instancesByClass = this.container.getInstancesByClass(instClass);
-        Instance iByType = Find.in(instancesByClass).by().highPriority().getInstance();
+        Instance iByType = Find.in(instancesByClass).by().highPriority().instance();
 
         Siblings siblings = iByType.getSiblings();
-        assertNotNull(siblings, "failed to get siblings");
+        assertNotNull(siblings, "failed to extract siblings");
         assertTrue(siblings.getCount() == 2, "expected siblings count: 2, but was " + siblings.getCount());
     }
 }

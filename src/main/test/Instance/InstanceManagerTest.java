@@ -22,7 +22,7 @@ class InstanceManagerTest {
     @Test
     void addInstance() {
         List<String> list = new ArrayList<>();
-        this.container.addInstance(list);
+        this.container.registerInstance(list);
 
         Class instClass = list.getClass();
         Instance i = (Instance) Arrays.stream(this.container.getInstancesByClass(instClass).toArray()).findFirst().get();
@@ -33,8 +33,8 @@ class InstanceManagerTest {
     void priorityIsDifferent() {
         List<String> list = new ArrayList<>();
         List<String> list2 = new ArrayList<>();
-        this.container.addInstance(list);
-        this.container.addInstance(list2);
+        this.container.registerInstance(list);
+        this.container.registerInstance(list2);
 
         Class instClass = list.getClass();
         Instance i = (Instance) Arrays.stream(this.container.getInstancesByClass(instClass).toArray()).findFirst().get();
@@ -48,8 +48,8 @@ class InstanceManagerTest {
     void setTag() {
         List<String> list = new ArrayList<>();
         List<String> list2 = new ArrayList<>();
-        this.container.addInstance(list);
-        this.container.addInstance(list2);
+        this.container.registerInstance(list);
+        this.container.registerInstance(list2);
 
         Class instClass = list.getClass();
         Instance i = (Instance) Arrays.stream(this.container.getInstancesByClass(instClass).toArray()).findFirst().orElse(null);

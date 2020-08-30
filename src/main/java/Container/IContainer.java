@@ -8,7 +8,9 @@ import Instance.Instance;
 public interface IContainer <T> {
 
     int getSize();
-    void addInstance(T instance);
+    void registerInstance(T instance);
+    T extract(Class<T> classType);
+    List<T> extractAll(Class<T> classType);
     List<Instance> getInstancesByInterface(Class superClass);
     List<Instance> getInstancesByClass(Class instanceClass);
 }
