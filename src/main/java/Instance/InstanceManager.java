@@ -38,11 +38,10 @@ public class InstanceManager <T> {
         List<Instance> instancesList = new ArrayList<>();
 
         for (int i = 0; i < this.lastAddedIndex; i++) {
-            if(this.instances[i].isImplementsInterface(iFace)){
+            if(this.instances[i].isInterfaceImplemented(iFace)){
                 instancesList.add(this.instances[i]);
             }
         }
-
         return instancesList;
     }
 

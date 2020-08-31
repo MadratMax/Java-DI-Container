@@ -91,8 +91,7 @@ public class Instance<T> {
         this.tag = tag;
     }
 
-    public boolean isImplementsInterface(Class iFace) {
-
+    public boolean isInterfaceImplemented(Class iFace) {
         return Arrays.stream(this.implementedIFaces).anyMatch(x -> x.equals(iFace));
     }
 

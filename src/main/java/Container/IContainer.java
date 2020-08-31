@@ -1,8 +1,6 @@
 package Container;
 
-import java.lang.reflect.Type;
 import java.util.List;
-
 import Instance.Instance;
 import SearchEngine.Find;
 

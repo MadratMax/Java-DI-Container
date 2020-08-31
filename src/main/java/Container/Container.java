@@ -36,7 +36,6 @@ public class Container <T> implements IContainer<T> {
     }
 
     public T extract(Class<T> interfaceType){
-
         List<Instance> instancesByIFace = this.getInstancesByInterface(interfaceType);
         Instance i = (Instance) this.find().in(instancesByIFace).by().highPriority().instance();
 
@@ -47,7 +46,6 @@ public class Container <T> implements IContainer<T> {
     }
 
     public ArrayList<T> extractAll(Class<T> interfaceType){
-
         ArrayList<T> coreInstanceList = new ArrayList<T>();
         List<Instance> instancesByIFace = this.getInstancesByInterface(interfaceType);
 

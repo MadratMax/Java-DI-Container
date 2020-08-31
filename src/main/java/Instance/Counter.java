@@ -3,7 +3,6 @@ package Instance;
 public class Counter {
     private int creatingAttempt;
 
-
     public Counter(){
         this.creatingAttempt++;
     }
