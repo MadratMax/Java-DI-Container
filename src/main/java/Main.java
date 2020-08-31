@@ -3,6 +3,7 @@ import Container.IContainer;
 import SearchEngine.Find;
 import TestData.DifLogger;
 import TestData.ILogger;
+import TestData.ITestIFace;
 import TestData.Logger;
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class Main<T> {
         container.registerInstance(difL5);
         //container.registerInstance(l1);
 
-        container.find().in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance().setPriority(5);
+        container.find().in(container.getInstancesByInterface(ITestIFace.class)).by().highPriority().instance().setPriority(5);
         container.find().in(container.getInstancesByInterface(ILogger.class)).by().priority(1).instance().setPriority(0);
 
         ArrayList<ILogger> all = (ArrayList) container.extractAll(ILogger.class);

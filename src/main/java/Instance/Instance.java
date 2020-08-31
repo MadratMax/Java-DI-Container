@@ -3,6 +3,7 @@ package Instance;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Instance<T> {
     private int priority;
     private String date;
     private String tag;
+    private Class[] implementedIFaces;
 
     public Instance(T coreInstance){
         if(coreInstance != null)
@@ -26,9 +28,9 @@ public class Instance<T> {
             this.siblings = new Siblings();
             this.date = new SimpleDateFormat("yyyyMMdd_HHmmssms").format(Calendar.getInstance().getTime());
             this.tag = Integer.toString(this.priority);
+            this.coreInstance = coreInstance;
+            this.implementedIFaces = this.getImplementedInterfaces();
         }
-
-        this.coreInstance = coreInstance;
     }
 
     public String getName(){
@@ -91,8 +93,7 @@ public class Instance<T> {
 
     public boolean isImplementsInterface(Class iFace) {
 
-        Class interfaceImplemented = this.coreInstance.getClass().getInterfaces()[0];
-        return interfaceImplemented.equals(iFace);
+        return Arrays.stream(this.implementedIFaces).anyMatch(x -> x.equals(iFace));
     }
 
     public void addSibling(Instance siblingInstance){
@@ -105,5 +106,9 @@ public class Instance<T> {
 
     public int getSiblingCount(){
         return this.siblings.getCount();
+    }
+
+    private Class[] getImplementedInterfaces(){
+        return this.coreInstance.getClass().getInterfaces();
     }
 }

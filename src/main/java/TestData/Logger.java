@@ -1,6 +1,6 @@
 package TestData;
 
-public class Logger implements ILogger
+public class Logger implements ILogger, ITestIFace
 {
     private String message;
 
