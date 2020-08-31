@@ -59,8 +59,10 @@ public class InstanceManager <T> {
                 newInstance.addSibling(i);
             if(!this.instances[Arrays.asList(this.instances).indexOf(i)].equals(newInstance))
                 this.instances[Arrays.asList(this.instances).indexOf(i)].addSibling(newInstance);
-            newInstance.setPriority(priority++);
+            priority++;
         }
+
+        newInstance.setPriority(priority-1);
     }
 
     public Instance getNextInstanceByIFaceType(List<Instance> instancesByIFace){

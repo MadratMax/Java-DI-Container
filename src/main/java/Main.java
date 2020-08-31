@@ -2,7 +2,6 @@ import Container.Container;
 import Container.IContainer;
 import TestData.DifLogger;
 import TestData.ILogger;
-import TestData.ITestIFace;
 import TestData.Logger;
 
 public class Main<T> {
@@ -29,16 +28,16 @@ public class Main<T> {
 
         container.registerInstance(l4).setTag("l4").setPriority(2);
 
-        //container.activateSiblings();
+        container.activateSiblings();
         //ITestIFace testL1 = (ITestIFace) container.extract(ITestIFace.class);
         ((ILogger) container.extract(ILogger.class)).write();
         ((ILogger) container.extract(ILogger.class)).write();
         ((ILogger) container.extract(ILogger.class)).write();
 
-        for (int i = 0; i < 14; i++){
-            ((ITestIFace) container.extract(ITestIFace.class)).write();
-            //container.find().in(container.getInstancesByClass(Logger.class)).by().priority(i).instance().setPriority(i+4);
-        }
+//        for (int i = 0; i < 14; i++){
+//            ((ITestIFace) container.extract(ITestIFace.class)).write();
+//            //container.find().in(container.getInstancesByClass(Logger.class)).by().priority(i).instance().setPriority(i+4);
+//        }
 
         //testL1.write();
         //testL2.write();

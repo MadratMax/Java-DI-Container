@@ -154,7 +154,7 @@ public class ExtractTest {
     }
 
     @Test
-    void changePriority() {
+    void changePriorityAndExtract() {
         String expectedName1 = "l1";
 
         ITestIFace l = null;

@@ -1,5 +1,7 @@
 package Instance;
 
+import SearchEngine.Find;
+
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,9 +43,6 @@ public class Instance<T> {
     }
 
     public String getTag() {
-        if(this.priority == 0)
-            return "major";
-
         return this.tag;
     }
 
@@ -82,9 +81,22 @@ public class Instance<T> {
         if(this.priority == priority)
             return this;
 
+        int priorityExtender = this.siblings.getCount();
+        Instance lastEmptyInstance = null;
+        Instance samePriorityInstance = new Find().in(siblings.get()).by().priority(priority).instance();
+
+        if(samePriorityInstance != null){
+            while (samePriorityInstance.getPriority() == priority){
+                lastEmptyInstance = new Find().in(siblings.get()).by().priority(priorityExtender).instance();
+
+                if(lastEmptyInstance == null){
+                    samePriorityInstance.setPriority(priorityExtender++);
+                }
+                priorityExtender++;
+            }
+        }
+
         this.priority = priority;
-        //this.siblings.updatePriority(priority);
-        //setTag(Integer.toString(this.priority));
         return this;
     }
 

@@ -21,7 +21,7 @@ public class InstanceConfigurationBuilder {
         this.instanceCount = this.instances.toArray().length;
     }
 
-    public Instance instance(){
+    public Instance instance() throws NullPointerException{
         return this._instance;
     }
 
