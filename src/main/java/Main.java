@@ -6,6 +6,7 @@ import TestData.ILogger;
 import TestData.Logger;
 import Instance.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main<T> {
@@ -34,17 +35,16 @@ public class Main<T> {
         Find.in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance().setPriority(5);
         Find.in(container.getInstancesByInterface(ILogger.class)).by().priority(1).instance().setPriority(0);
 
-        List<ILogger> all = container.extractAll(ILogger.class);
+        ArrayList<ILogger> all = (ArrayList) container.extractAll(ILogger.class);
 
-        ILogger l = (ILogger) container.extract(ILogger.class);
+        for (ILogger l :
+                all) {
+            l.write();
+        }
 
-        l.write();
+        //ILogger l = (ILogger) container.extract(ILogger.class);
 
-        Find.in(container.getInstancesByInterface(ILogger.class)).by().priority(0).instance().setPriority(1);
-
-        l = (ILogger) container.extract(ILogger.class);
-
-        l.write();
+        //l.write();
     }
 
 

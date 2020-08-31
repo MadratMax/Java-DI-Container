@@ -44,10 +44,10 @@ public class Container <T> implements IContainer<T> {
         return null;
     }
 
-    public List<T> extractAll(Class<T> classType){
+    public ArrayList<T> extractAll(Class<T> interfaceType){
 
-        List<T> coreInstanceList = new ArrayList<T>();
-        List<Instance> instancesByIFace = this.getInstancesByInterface(classType);
+        ArrayList<T> coreInstanceList = new ArrayList<T>();
+        List<Instance> instancesByIFace = this.getInstancesByInterface(interfaceType);
 
         for (Instance i :
                 instancesByIFace) {
