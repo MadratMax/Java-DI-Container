@@ -5,6 +5,7 @@ import Instance.InstanceManager;
 import SearchEngine.By;
 import SearchEngine.Find;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,12 +25,14 @@ public class Container <T> implements IContainer<T> {
         return this.containerSize;
     }
 
-    public void registerInstance(T instance){
+    public Instance registerInstance(T instance){
         if(this.instancesAdded == this.containerSize)
             throw new ArrayIndexOutOfBoundsException("Exceeded Container size: " + this.containerSize);
 
-        this.instanceManager.addInstance(instance);
+        Instance newInstance = this.instanceManager.addInstance(instance);
         instancesAdded++;
+
+        return newInstance;
     }
 
     public T extract(Class<T> interfaceType){
@@ -66,5 +69,11 @@ public class Container <T> implements IContainer<T> {
 
     public Find find(){
         return new Find();
+    }
+
+    public void dispose(){
+        this.instanceManager = null;
+        this.instancesAdded = 0;
+        this.instanceManager = new InstanceManager<T>(this);
     }
 }

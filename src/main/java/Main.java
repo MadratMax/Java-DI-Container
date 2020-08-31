@@ -22,27 +22,37 @@ public class Main<T> {
         ILogger difL5 = new DifLogger();
 
         IContainer container = new Container(6);
-        //container.registerInstance(c);
-        container.registerInstance(l1);
-        container.registerInstance(l2);
-        //container.registerInstance(l4);
-        container.registerInstance(difL5);
-        //container.registerInstance(l1);
+        container.registerInstance(c).setTag("c");;
+        container.registerInstance(l1).setTag("l1");;
+        container.registerInstance(l2).setTag("l2");;
+        container.registerInstance(l4).setTag("l4");
+        container.registerInstance(difL5).setTag("difL5");
+        container.registerInstance(l1).setTag("l1");;
 
         container.find().in(container.getInstancesByInterface(ITestIFace.class)).by().highPriority().instance().setPriority(5);
         container.find().in(container.getInstancesByInterface(ILogger.class)).by().priority(1).instance().setPriority(0);
 
-        ArrayList<ILogger> all = (ArrayList) container.extractAll(ILogger.class);
 
-        for (ILogger l :
-                all) {
-            l.write();
-        }
+
+
 
         container.find().in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance().setPriority(33);
+        container.find().in(container.getInstancesByInterface(ILogger.class)).by().tag("l4").instance().setPriority(44);
 
         ITestIFace l = (ITestIFace) container.extract(ITestIFace.class);
 
         l.write();
+
+        container.dispose();
+        ArrayList<ILogger> all = (ArrayList) container.extractAll(ILogger.class);
+        for (ILogger lw :
+                all) {
+            lw.write();
+        }
+
+        container.registerInstance(difL5).setTag("difL5");
+        ILogger newLogger = (ILogger) container.extract(ILogger.class);
+
+        newLogger.write();
     }
 }

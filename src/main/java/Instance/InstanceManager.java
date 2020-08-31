@@ -21,7 +21,7 @@ public class InstanceManager <T> {
         this.typeSet = new TypeSet();
     }
 
-    public void addInstance(T instance){
+    public Instance addInstance(T instance){
         Instance<T> newInstance = new Instance<T>(instance);
         this.instances[lastAddedIndex] = newInstance;
         Type instanceType = this.instances[lastAddedIndex].getType();
@@ -30,6 +30,8 @@ public class InstanceManager <T> {
 
         if(!typeAdded)
             this.setSiblingRelation(instanceType, newInstance);
+
+        return newInstance;
     }
 
     public List<Instance> getInstancesByInterface(Class iFace){
