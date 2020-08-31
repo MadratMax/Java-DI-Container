@@ -23,6 +23,10 @@ public class Container <T> implements IContainer<T> {
         this.activatedSiblings = true;
     }
 
+    public void deactivateSiblings(){
+        this.activatedSiblings = false;
+    }
+
     public int getSize(){
         return this.containerSize;
     }
@@ -82,8 +86,6 @@ public class Container <T> implements IContainer<T> {
     }
 
     private T extractNext(List<Instance> instancesByIFace) {
-        // Instance maxPriorityInstance = this.find().in(instancesByIFace).by().highPriority().instance();
-
         Instance minInvokeCountInstance =
                 this.find().in(instancesByIFace).by().minInvokeCount().instance();
 
@@ -95,9 +97,6 @@ public class Container <T> implements IContainer<T> {
                 return (T) maxPriorityInstance.get();
             }
         }
-
-        // Instance instance =
-                // this.find().in(instancesByIFace).by().minInvokeCount().instance();
 
         return (T) minInvokeCountInstance.get();
     }

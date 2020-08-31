@@ -1,12 +1,14 @@
 package Container;
 
-import java.util.List;
 import Instance.Instance;
 import SearchEngine.Find;
+
+import java.util.List;
 
 public interface IContainer <T> {
 
     void activateSiblings();
+    void deactivateSiblings();
     int getSize();
     Instance registerInstance(T instance);
     T extract(Class<T> classType);

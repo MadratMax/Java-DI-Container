@@ -7,6 +7,11 @@ public class Logger implements ILogger, ITestIFace{
         this.message = message;
     }
 
+    @Override
+    public String getName() {
+        return this.message;
+    }
+
     public void write(){
         System.out.println(this.message);
     }

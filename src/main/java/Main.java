@@ -18,7 +18,7 @@ public class Main<T> {
         ILogger l2 = new Logger("2 logger");
         ILogger l3 = new Logger("3 logger");
         ILogger l4 = new Logger("4 logger");
-        ILogger difL5 = new DifLogger();
+        ILogger difL5 = new DifLogger("dif logger");
 
         IContainer container = new Container(6);
         //container.registerInstance(c).setTag("c").setPriority(2);
