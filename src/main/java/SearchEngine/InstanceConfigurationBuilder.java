@@ -1,7 +1,6 @@
 package SearchEngine;
 
 import Instance.Instance;
-import javafx.beans.binding.ObjectBinding;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;

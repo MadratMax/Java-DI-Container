@@ -4,7 +4,6 @@ import TestData.DifLogger;
 import TestData.ILogger;
 import TestData.ITestIFace;
 import TestData.Logger;
-import java.util.ArrayList;
 
 public class Main<T> {
 
@@ -23,17 +22,20 @@ public class Main<T> {
 
         IContainer container = new Container(6);
         //container.registerInstance(c).setTag("c").setPriority(2);
+        container.registerInstance(difL5).setTag("difL5").setPriority(1);
         container.registerInstance(l1).setTag("l1").setPriority(0);
         container.registerInstance(l2).setTag("l2").setPriority(1);
-        container.registerInstance(l4).setTag("l4").setPriority(3);
-        //container.registerInstance(difL5).setTag("difL5").setPriority(1);
-        container.registerInstance(l3).setTag("l3").setPriority(2);
+        container.registerInstance(l3).setTag("l3").setPriority(3);
 
-        container.activateSiblings();
-        ITestIFace testL1 = (ITestIFace) container.extract(ITestIFace.class);
-        ILogger testL2 = (ILogger) container.extract(ILogger.class);
+        container.registerInstance(l4).setTag("l4").setPriority(2);
 
-        for (int i = 0; i < 4; i++){
+        //container.activateSiblings();
+        //ITestIFace testL1 = (ITestIFace) container.extract(ITestIFace.class);
+        ((ILogger) container.extract(ILogger.class)).write();
+        ((ILogger) container.extract(ILogger.class)).write();
+        ((ILogger) container.extract(ILogger.class)).write();
+
+        for (int i = 0; i < 14; i++){
             ((ITestIFace) container.extract(ITestIFace.class)).write();
             //container.find().in(container.getInstancesByClass(Logger.class)).by().priority(i).instance().setPriority(i+4);
         }

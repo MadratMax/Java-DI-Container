@@ -2,13 +2,9 @@ package Container;
 
 import Instance.Instance;
 import Instance.InstanceManager;
-import SearchEngine.By;
 import SearchEngine.Find;
 
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public class Container <T> implements IContainer<T> {
@@ -86,9 +82,23 @@ public class Container <T> implements IContainer<T> {
     }
 
     private T extractNext(List<Instance> instancesByIFace) {
-        Instance instance =
+        // Instance maxPriorityInstance = this.find().in(instancesByIFace).by().highPriority().instance();
+
+        Instance minInvokeCountInstance =
                 this.find().in(instancesByIFace).by().minInvokeCount().instance();
 
-        return (T) instance.get();
+        for (int i=0; i < instancesByIFace.size(); i++){
+            Instance maxPriorityInstance =
+                    this.find().in(instancesByIFace).by().priority(i).instance();
+
+            if(minInvokeCountInstance.equals(maxPriorityInstance)){
+                return (T) maxPriorityInstance.get();
+            }
+        }
+
+        // Instance instance =
+                // this.find().in(instancesByIFace).by().minInvokeCount().instance();
+
+        return (T) minInvokeCountInstance.get();
     }
 }
