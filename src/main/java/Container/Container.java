@@ -35,13 +35,12 @@ public class Container <T> implements IContainer<T> {
     public T extract(Class<T> interfaceType){
 
         List<Instance> instancesByIFace = this.getInstancesByInterface(interfaceType);
-        T i = (T) this.find().in(instancesByIFace).by().priority(0).instance().get();
+        Instance i = (Instance) this.find().in(instancesByIFace).by().highPriority().instance();
 
-        if(Arrays.stream(i.getClass().getInterfaces()).anyMatch(x -> x.equals(interfaceType))) {
-            return i;
-        }
+        if(i == null)
+            throw new NullPointerException("Failed to extract instance that implements " + interfaceType.toString() + ".");
 
-        return null;
+        return (T) i.get();
     }
 
     public ArrayList<T> extractAll(Class<T> interfaceType){

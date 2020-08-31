@@ -1,9 +1,11 @@
 package SearchEngine;
 
 import Instance.Instance;
+import javafx.beans.binding.ObjectBinding;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -12,10 +14,12 @@ public class InstanceConfigurationBuilder {
     private final List<Instance> instances;
     private Instance _instance;
     private final Stream<Object> stream;
+    private int instanceCount;
 
     public InstanceConfigurationBuilder(List<Instance> instances){
         this.instances = instances;
         stream = Arrays.stream(this.instances.toArray());
+        this.instanceCount = this.instances.toArray().length;
     }
 
     public Instance instance(){
@@ -48,7 +52,8 @@ public class InstanceConfigurationBuilder {
     }
 
     public InstanceConfigurationBuilder byHighPriority(){
-        this._instance = this.byPriority(0)._instance;
+        this._instance =
+                this.instances.stream().min(Comparator.comparing(Instance::getPriority)).orElse(null);
         return this;
     }
 }

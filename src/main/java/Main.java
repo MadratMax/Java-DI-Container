@@ -1,6 +1,5 @@
 import Container.Container;
 import Container.IContainer;
-import SearchEngine.Find;
 import TestData.DifLogger;
 import TestData.ILogger;
 import TestData.ITestIFace;
@@ -24,8 +23,8 @@ public class Main<T> {
 
         IContainer container = new Container(6);
         //container.registerInstance(c);
+        container.registerInstance(l1);
         container.registerInstance(l2);
-        container.registerInstance(l3);
         //container.registerInstance(l4);
         container.registerInstance(difL5);
         //container.registerInstance(l1);
@@ -40,12 +39,10 @@ public class Main<T> {
             l.write();
         }
 
-        container.find().in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance().setPriority(5);
+        container.find().in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance().setPriority(33);
 
-        //ILogger l = (ILogger) container.extract(ILogger.class);
+        ITestIFace l = (ITestIFace) container.extract(ITestIFace.class);
 
-        //l.write();
+        l.write();
     }
-
-
 }
