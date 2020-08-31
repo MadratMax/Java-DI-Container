@@ -86,18 +86,6 @@ public class Container <T> implements IContainer<T> {
     }
 
     private T extractNext(List<Instance> instancesByIFace) {
-        Instance minInvokeCountInstance =
-                this.find().in(instancesByIFace).by().minInvokeCount().instance();
-
-        for (int i=0; i < instancesByIFace.size(); i++){
-            Instance maxPriorityInstance =
-                    this.find().in(instancesByIFace).by().priority(i).instance();
-
-            if(minInvokeCountInstance.equals(maxPriorityInstance)){
-                return (T) maxPriorityInstance.get();
-            }
-        }
-
-        return (T) minInvokeCountInstance.get();
+        return (T) this.instanceManager.getNextInstanceByIFaceType(instancesByIFace).get();
     }
 }

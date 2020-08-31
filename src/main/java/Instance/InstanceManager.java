@@ -62,4 +62,20 @@ public class InstanceManager <T> {
             newInstance.setPriority(priority++);
         }
     }
+
+    public Instance getNextInstanceByIFaceType(List<Instance> instancesByIFace){
+        Instance minInvokeCountInstance =
+                this.container.find().in(instancesByIFace).by().minInvokeCount().instance();
+
+        for (int i=0; i < instancesByIFace.size(); i++){
+            Instance maxPriorityInstance =
+                    this.container.find().in(instancesByIFace).by().priority(i).instance();
+
+            if(minInvokeCountInstance.equals(maxPriorityInstance)){
+                return maxPriorityInstance;
+            }
+        }
+
+        return minInvokeCountInstance;
+    }
 }
