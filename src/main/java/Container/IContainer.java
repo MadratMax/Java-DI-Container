@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import Instance.Instance;
+import SearchEngine.Find;
 
 public interface IContainer <T> {
 
@@ -13,4 +14,5 @@ public interface IContainer <T> {
     List<T> extractAll(Class<T> classType);
     List<Instance> getInstancesByInterface(Class superClass);
     List<Instance> getInstancesByClass(Class instanceClass);
+    Find find();
 }

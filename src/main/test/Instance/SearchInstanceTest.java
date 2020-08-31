@@ -35,7 +35,7 @@ public class SearchInstanceTest {
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
 
-        Instance iByTag = Find.in(instancesByClass).by().tag("new-tag").instance();
+        Instance iByTag = this.container.find().in(instancesByClass).by().tag("new-tag").instance();
         assertNotNull(iByTag, "failed to find instance by tag");
     }
 
@@ -50,7 +50,7 @@ public class SearchInstanceTest {
         this.container.registerInstance(i3);
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
-        Instance iByPriority = Find.in(instancesByClass).by().priority(0).instance();
+        Instance iByPriority = this.container.find().in(instancesByClass).by().priority(0).instance();
         assertNotNull(iByPriority, "failed to find instance by priority");
     }
 
@@ -70,7 +70,7 @@ public class SearchInstanceTest {
         i.setId(3232);
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
-        Instance iById = Find.in(instancesByClass).by().id(3232).instance();
+        Instance iById = this.container.find().in(instancesByClass).by().id(3232).instance();
         assertNotNull(iById, "failed to find instance by id");
     }
 
@@ -87,7 +87,7 @@ public class SearchInstanceTest {
         Class instClass = i3.getClass();
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
-        Instance iByType = Find.in(instancesByClass).by().type(instClass).instance();
+        Instance iByType = this.container.find().in(instancesByClass).by().type(instClass).instance();
         assertEquals(instClass, iByType.getType(), "expected type: " + instClass + " , but was: " + iByType.getType());
     }
 
@@ -107,7 +107,7 @@ public class SearchInstanceTest {
         Instance i = (Instance) Arrays.stream(this.container.getInstancesByInterface(iFace).toArray()).reduce((a, b) -> b).orElse(null);
         i.setId(3232);
 
-        Instance iById = Find.in(instancesByInterface).by().id(3232).instance();
+        Instance iById = this.container.find().in(instancesByInterface).by().id(3232).instance();
         assertNotNull(iById, "failed to find instance by id");
     }
 }

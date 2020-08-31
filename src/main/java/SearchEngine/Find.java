@@ -6,7 +6,11 @@ import java.util.List;
 
 public class Find {
 
-    public static By in(List<Instance> instances){
+    public Find(){
+
+    }
+
+    public By in(List<Instance> instances){
         return new By(new InstanceConfigurationBuilder(instances));
     }
 }

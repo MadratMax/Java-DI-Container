@@ -34,7 +34,7 @@ public class SiblingsTest {
 
         Class instClass = i3.getClass();
         List<Instance> instancesByClass = this.container.getInstancesByClass(instClass);
-        Instance iByType = Find.in(instancesByClass).by().highPriority().instance();
+        Instance iByType = this.container.find().in(instancesByClass).by().highPriority().instance();
 
         ArrayList siblings = iByType.getSiblings();
         assertNotNull(siblings, "failed to extract siblings");

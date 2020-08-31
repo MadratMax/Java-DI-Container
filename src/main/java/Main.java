@@ -29,8 +29,8 @@ public class Main<T> {
         container.registerInstance(difL5);
         //container.registerInstance(l1);
 
-        Find.in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance().setPriority(5);
-        Find.in(container.getInstancesByInterface(ILogger.class)).by().priority(1).instance().setPriority(0);
+        container.find().in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance().setPriority(5);
+        container.find().in(container.getInstancesByInterface(ILogger.class)).by().priority(1).instance().setPriority(0);
 
         ArrayList<ILogger> all = (ArrayList) container.extractAll(ILogger.class);
 
@@ -38,6 +38,8 @@ public class Main<T> {
                 all) {
             l.write();
         }
+
+        container.find().in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance().setPriority(5);
 
         //ILogger l = (ILogger) container.extract(ILogger.class);
 
