@@ -4,10 +4,7 @@ import SearchEngine.Find;
 import TestData.DifLogger;
 import TestData.ILogger;
 import TestData.Logger;
-import Instance.*;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main<T> {
 
