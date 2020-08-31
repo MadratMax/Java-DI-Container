@@ -56,4 +56,10 @@ public class InstanceConfigurationBuilder {
                 this.instances.stream().min(Comparator.comparing(Instance::getPriority)).orElse(null);
         return this;
     }
+
+    public InstanceConfigurationBuilder byMinInvokeCount(){
+        this._instance =
+                this.instances.stream().min(Comparator.comparing(Instance::getInvokeCount)).orElse(null);
+        return this;
+    }
 }

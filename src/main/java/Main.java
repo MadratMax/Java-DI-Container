@@ -22,37 +22,23 @@ public class Main<T> {
         ILogger difL5 = new DifLogger();
 
         IContainer container = new Container(6);
-        container.registerInstance(c).setTag("c");;
-        container.registerInstance(l1).setTag("l1");;
-        container.registerInstance(l2).setTag("l2");;
-        container.registerInstance(l4).setTag("l4");
-        container.registerInstance(difL5).setTag("difL5");
-        container.registerInstance(l1).setTag("l1");;
+        //container.registerInstance(c).setTag("c").setPriority(2);
+        container.registerInstance(l1).setTag("l1").setPriority(0);
+        container.registerInstance(l2).setTag("l2").setPriority(1);
+        container.registerInstance(l4).setTag("l4").setPriority(3);
+        //container.registerInstance(difL5).setTag("difL5").setPriority(1);
+        container.registerInstance(l3).setTag("l3").setPriority(2);
 
-        container.find().in(container.getInstancesByInterface(ITestIFace.class)).by().highPriority().instance().setPriority(5);
-        container.find().in(container.getInstancesByInterface(ILogger.class)).by().priority(1).instance().setPriority(0);
+        container.activateSiblings();
+        ITestIFace testL1 = (ITestIFace) container.extract(ITestIFace.class);
+        ILogger testL2 = (ILogger) container.extract(ILogger.class);
 
-
-
-
-
-        container.find().in(container.getInstancesByInterface(ILogger.class)).by().highPriority().instance().setPriority(33);
-        container.find().in(container.getInstancesByInterface(ILogger.class)).by().tag("l4").instance().setPriority(44);
-
-        ITestIFace l = (ITestIFace) container.extract(ITestIFace.class);
-
-        l.write();
-
-        container.dispose();
-        ArrayList<ILogger> all = (ArrayList) container.extractAll(ILogger.class);
-        for (ILogger lw :
-                all) {
-            lw.write();
+        for (int i = 0; i < 4; i++){
+            ((ITestIFace) container.extract(ITestIFace.class)).write();
+            //container.find().in(container.getInstancesByClass(Logger.class)).by().priority(i).instance().setPriority(i+4);
         }
 
-        container.registerInstance(difL5).setTag("difL5");
-        ILogger newLogger = (ILogger) container.extract(ILogger.class);
-
-        newLogger.write();
+        //testL1.write();
+        //testL2.write();
     }
 }

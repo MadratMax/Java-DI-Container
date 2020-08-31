@@ -74,21 +74,24 @@ public class Instance<T> {
         return this.coreInstance;
     }
 
-    public void setId(int id){
+    public Instance setId(int id){
         this.id = id;
+        return this;
     }
 
-    public void setPriority(int priority){
+    public Instance setPriority(int priority){
         if(this.priority == priority)
-            return;
+            return this;
 
         this.priority = priority;
         //this.siblings.updatePriority(priority);
-        setTag(Integer.toString(this.priority));
+        //setTag(Integer.toString(this.priority));
+        return this;
     }
 
-    public void setTag(String tag){
+    public Instance setTag(String tag){
         this.tag = tag;
+        return this;
     }
 
     public boolean isInterfaceImplemented(Class iFace) {

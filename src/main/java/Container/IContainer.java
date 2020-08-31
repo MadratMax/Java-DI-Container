@@ -6,6 +6,7 @@ import SearchEngine.Find;
 
 public interface IContainer <T> {
 
+    void activateSiblings();
     int getSize();
     Instance registerInstance(T instance);
     T extract(Class<T> classType);

@@ -45,5 +45,9 @@ public class By {
         public InstanceConfigurationBuilder highPriority(){
             return this.builder.byHighPriority();
         }
+
+        public InstanceConfigurationBuilder minInvokeCount(){
+            return this.builder.byMinInvokeCount();
+        }
     }
 }
