@@ -42,6 +42,10 @@ public class By {
             return this.builder.byType(type);
         }
 
+        public InstanceConfigurationBuilder lowPriority(){
+            return this.builder.byLowPriority();
+        }
+
         public InstanceConfigurationBuilder highPriority(){
             return this.builder.byHighPriority();
         }

@@ -145,4 +145,41 @@ public class PriorityTest {
                 extractedInstanceName,
                 "expected extracted instance is l4, but was " + extractedInstanceName);
     }
+
+    @Test
+    void thereIsNoIdenticalPriority() {
+
+        ILogger l1 = new Logger("l1");
+        ILogger l2 = new Logger("l2");
+        ILogger l3 = new Logger("l3");
+        ILogger l4 = new Logger("l4");
+
+        Instance i1 = this.container.registerInstance(l1).setTag("l1"); // default priority: 0
+        Instance i2 = this.container.registerInstance(l2).setTag("l2"); // default priority: 1
+        Instance i3 = this.container.registerInstance(l3).setTag("l3"); // default priority: 2
+        Instance i4 = this.container.registerInstance(l4).setTag("l4"); // default priority: 3
+
+        i3.setPriority(0);
+
+        Instance majorPriorityInstance =
+                this.container.find().in(container.getInstancesByClass(Logger.class)).by().priority(0).instance();
+
+        assertEquals(
+                i3.get(), majorPriorityInstance.get(),
+                "failed to update priority");
+
+        int minPriority =
+                this.container
+                        .find()
+                        .in(container.getInstancesByInterface(ILogger.class))
+                        .by()
+                        .lowPriority()
+                        .instance()
+                        .getPriority();
+
+        assertEquals(
+                4,
+                minPriority,
+                "expected min priority is 4, but was " + minPriority);
+    }
 }

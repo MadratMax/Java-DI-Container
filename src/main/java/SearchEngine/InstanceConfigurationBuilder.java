@@ -50,6 +50,12 @@ public class InstanceConfigurationBuilder {
         return this;
     }
 
+    public InstanceConfigurationBuilder byLowPriority(){
+        this._instance =
+                this.instances.stream().max(Comparator.comparing(Instance::getPriority)).orElse(null);
+        return this;
+    }
+
     public InstanceConfigurationBuilder byHighPriority(){
         this._instance =
                 this.instances.stream().min(Comparator.comparing(Instance::getPriority)).orElse(null);
