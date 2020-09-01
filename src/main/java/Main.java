@@ -3,6 +3,7 @@ import Container.IContainer;
 import TestData.DifLogger;
 import TestData.ILogger;
 import TestData.Logger;
+import Container.InstanceSupply;
 
 public class Main<T> {
 
@@ -24,22 +25,21 @@ public class Main<T> {
         container.registerInstance(difL5).setTag("difL5").setPriority(1);
         container.registerInstance(l1).setTag("l1").setPriority(0);
         container.registerInstance(l2).setTag("l2").setPriority(1);
-        container.registerInstance(l3).setTag("l3").setPriority(3);
-
-        container.registerInstance(l4).setTag("l4").setPriority(2);
+        container.registerInstance(l3).setTag("l3").setPriority(2);
+        container.registerInstance(l4).setTag("l4").setPriority(3);
 
         container.activateSiblings();
+        //container.setDefaultInterface(ILogger.class);
         //ITestIFace testL1 = (ITestIFace) container.extract(ITestIFace.class);
-        ((ILogger) container.extract(ILogger.class)).write();
-        ((ILogger) container.extract(ILogger.class)).write();
-        ((ILogger) container.extract(ILogger.class)).write();
-
-//        for (int i = 0; i < 14; i++){
-//            ((ITestIFace) container.extract(ITestIFace.class)).write();
-//            //container.find().in(container.getInstancesByClass(Logger.class)).by().priority(i).instance().setPriority(i+4);
-//        }
-
-        //testL1.write();
-        //testL2.write();
+        InstanceSupply<ILogger> logger = container.getSupply(ILogger.class);
+//        ((ILogger) container.getInstance(ILogger.class)).write();
+//        ((ILogger) container.getInstance(ILogger.class)).write();
+//        ((ILogger) container.getInstance(ILogger.class)).write();
+//        ((ILogger) container.getInstance(ILogger.class)).write();
+        logger.get().write();
+        logger.get().write();
+        logger.get().write();
+        logger.get().write();
+        logger.get().write();
     }
 }

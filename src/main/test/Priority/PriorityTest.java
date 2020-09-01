@@ -138,7 +138,7 @@ public class PriorityTest {
                 majorPriorityInstance == null,
                 "instance with 0 priority should not exist");
 
-        String extractedInstanceName = ((ILogger) this.container.extract(ILogger.class)).getName();
+        String extractedInstanceName = ((ILogger) this.container.getInstance(ILogger.class)).getName();
 
         assertEquals(
                 "l4",

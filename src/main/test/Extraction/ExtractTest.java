@@ -21,7 +21,7 @@ public class ExtractTest {
 
     public ExtractTest() {
         this.container = new Container(5);
-        this.instanceManager = new InstanceManager(this.container);
+        //this.instanceManager = new InstanceManager(this.container);
 
         ILogger l1 = new Logger("l1");
         ILogger l2 = new Logger("l2");
@@ -38,7 +38,7 @@ public class ExtractTest {
 
     @Test
     void extractInstance() {
-        ILogger l = (ILogger) this.container.extract(ILogger.class);
+        ILogger l = (ILogger) this.container.getInstance(ILogger.class);
 
         assertNotNull(l, "extracted instance is null");
 
@@ -51,7 +51,7 @@ public class ExtractTest {
 
     @Test
     void extractAllInstances() {
-        ArrayList<ILogger> loggers = (ArrayList) this.container.extractAll(ILogger.class);
+        ArrayList<ILogger> loggers = (ArrayList) this.container.getAllInstances(ILogger.class);
 
         loggers.toArray();
 
@@ -93,35 +93,35 @@ public class ExtractTest {
 
         ITestIFace l = null;
 
-        l = (ITestIFace) this.container.extract(ITestIFace.class);
+        l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
                 expectedName1,
                 l.getName(),
                 "invalid instance has been extracted. expected l2, but was " + l.getName());
 
-        l = (ITestIFace) this.container.extract(ITestIFace.class);
+        l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
                 expectedName2,
                 l.getName(),
                 "invalid instance has been extracted. expected l3, but was " + l.getName());
 
-        l = (ITestIFace) this.container.extract(ITestIFace.class);
+        l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
                 expectedName3,
                 l.getName(),
                 "invalid instance has been extracted. expected l1, but was " + l.getName());
 
-        l = (ITestIFace) this.container.extract(ITestIFace.class);
+        l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
                 expectedName4,
                 l.getName(),
                 "invalid instance has been extracted. expected l4, but was " + l.getName());
 
-        l = (ITestIFace) this.container.extract(ITestIFace.class);
+        l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
                 expectedName1,
@@ -138,14 +138,14 @@ public class ExtractTest {
 
         ITestIFace l = null;
 
-        l = (ITestIFace) this.container.extract(ITestIFace.class);
+        l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
                 expectedName1,
                 l.getName(),
                 "invalid instance has been extracted. expected l2, but was " + l.getName());
 
-        l = (ITestIFace) this.container.extract(ITestIFace.class);
+        l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
                 expectedName1,
@@ -159,7 +159,7 @@ public class ExtractTest {
 
         ITestIFace l = null;
 
-        l = (ITestIFace) this.container.extract(ITestIFace.class);
+        l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
                 expectedName1,
@@ -169,7 +169,7 @@ public class ExtractTest {
         this.container.find().in(container.getInstancesByClass(Logger.class)).by().priority(0).instance().setPriority(5);
         this.container.find().in(container.getInstancesByClass(Logger.class)).by().priority(1).instance().setPriority(6);
 
-        l = (ITestIFace) this.container.extract(ITestIFace.class);
+        l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
                 "l4",
@@ -179,14 +179,14 @@ public class ExtractTest {
 
     @Test
     void extractByDifInterfaces() {
-        ITestIFace l1 = (ITestIFace) this.container.extract(ITestIFace.class);
+        ITestIFace l1 = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l1, "extracted instance is null");
         assertEquals(
                 "l1",
                 l1.getName(),
                 "invalid instance has been extracted. expected l1, but was " + l1.getName());
 
-        ILogger difLogger = (ILogger) this.container.extract(ILogger.class);
+        ILogger difLogger = (ILogger) this.container.getInstance(ILogger.class);
         assertNotNull(difLogger, "extracted instance is null");
         assertEquals(
                 "difLogger",
