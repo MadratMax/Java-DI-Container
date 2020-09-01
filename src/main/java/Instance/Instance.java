@@ -81,6 +81,8 @@ public class Instance<T> {
         if(this.priority == priority)
             return this;
 
+        this.priority = priority;
+
         int priorityExtender = this.siblings.getCount();
         Instance lastEmptyInstance = null;
         Instance samePriorityInstance = new Find().in(siblings.get()).by().priority(priority).instance();
@@ -96,7 +98,6 @@ public class Instance<T> {
             }
         }
 
-        this.priority = priority;
         return this;
     }
 

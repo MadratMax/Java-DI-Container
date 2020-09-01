@@ -1,11 +1,11 @@
 package SearchEngine;
 
 import Instance.Instance;
+import javafx.beans.binding.ObjectBinding;
+import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
 
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class InstanceConfigurationBuilder {

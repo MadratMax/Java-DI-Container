@@ -4,9 +4,7 @@ import Container.IContainer;
 import Types.TypeSet;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class InstanceManager <T> {
 
@@ -62,22 +60,35 @@ public class InstanceManager <T> {
             priority++;
         }
 
-        newInstance.setPriority(priority-1);
+        int minPriority = instances.stream().max(Comparator.comparing(Instance::getPriority)).get().getPriority();
+        newInstance.setPriority(minPriority+1);
     }
 
     public Instance getNextInstanceByIFaceType(List<Instance> instancesByIFace){
         Instance minInvokeCountInstance =
                 this.container.find().in(instancesByIFace).by().minInvokeCount().instance();
+        ArrayList<Instance> maxPriorityInstances = new ArrayList<Instance>();
 
-        for (int i=0; i < instancesByIFace.size(); i++){
+        int minP = instancesByIFace.stream().max(Comparator.comparing(Instance::getPriority)).get().getPriority();
+
+        for (int i=0; i <= minP; i++){
             Instance maxPriorityInstance =
                     this.container.find().in(instancesByIFace).by().priority(i).instance();
 
+            if(maxPriorityInstance != null){
+                maxPriorityInstances.add(maxPriorityInstance);
+            }
+
             if(minInvokeCountInstance.equals(maxPriorityInstance)){
-                return maxPriorityInstance;
+                //return maxPriorityInstance;
             }
         }
 
-        return minInvokeCountInstance;
+        Instance i = maxPriorityInstances.stream().min(Comparator.comparing(Instance::getInvokeCount)).get();
+
+        return i;
+        //return this.container.find().in(maxPriorityInstances).by().highPriority().instance();
+
+        //return minInvokeCountInstance;
     }
 }

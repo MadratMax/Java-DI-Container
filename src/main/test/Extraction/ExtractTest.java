@@ -110,16 +110,16 @@ public class ExtractTest {
         l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
-                expectedName3,
+                expectedName4,
                 l.getName(),
-                "invalid instance has been extracted. expected l1, but was " + l.getName());
+                "invalid instance has been extracted. expected l4, but was " + l.getName());
 
         l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
         assertEquals(
-                expectedName4,
+                expectedName3,
                 l.getName(),
-                "invalid instance has been extracted. expected l4, but was " + l.getName());
+                "invalid instance has been extracted. expected l1, but was " + l.getName());
 
         l = (ITestIFace) this.container.getInstance(ITestIFace.class);
         assertNotNull(l, "extracted instance is null");
