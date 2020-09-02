@@ -40,6 +40,11 @@ public class InstanceManager <T> {
                 instancesList.add(this.instances[i]);
             }
         }
+
+        if(instancesList.size() == 0){
+            throw new NullPointerException("No elements found with interface " + iFace.toString());
+        }
+
         return instancesList;
     }
 
@@ -67,6 +72,7 @@ public class InstanceManager <T> {
     public Instance getNextInstanceByIFaceType(List<Instance> instancesByIFace){
         Instance minInvokeCountInstance =
                 this.container.find().in(instancesByIFace).by().minInvokeCount().instance();
+
         ArrayList<Instance> maxPriorityInstances = new ArrayList<Instance>();
 
         int minP = instancesByIFace.stream().max(Comparator.comparing(Instance::getPriority)).get().getPriority();

@@ -28,6 +28,8 @@ public class Extractor <T> implements IExtractor<T>{
 
     @Override
     public List<Instance> getInstancesByInterface(Class iFace){
+        List<Instance> instanceList = this.instanceManager.getInstancesByInterface(iFace);
+
         return this.instanceManager.getInstancesByInterface(iFace);
     }
 
