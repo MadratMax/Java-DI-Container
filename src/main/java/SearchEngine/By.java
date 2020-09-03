@@ -46,6 +46,10 @@ public class By<T> {
             return this.builder.byType(classType);
         }
 
+        public InstanceConfigurationBuilder interfaceType(Class<T> iFaceType){
+            return this.builder.byInterface(iFaceType);
+        }
+
         public InstanceConfigurationBuilder lowPriority(){
             return this.builder.byLowPriority();
         }

@@ -27,8 +27,11 @@ public class PackageManager {
                 this.createPackage(instance.getTag(), instance);
             }
             else {
-                this.findPackageByTag(instance.getTag()).add(instance);
+                 this.findPackageByTag(instance.getTag()).add(instance);
             }
+        }
+        else{
+            this.createPackage(instance.getTag(), instance);
         }
     }
 

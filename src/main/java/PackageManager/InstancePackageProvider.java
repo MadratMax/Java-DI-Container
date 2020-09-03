@@ -16,7 +16,7 @@ public class InstancePackageProvider {
         this.pack = new Package(this.current, this.find);
     }
 
-    public Package pack(String tag) throws NullPointerException{
+    public Package getPackage(String tag) throws NullPointerException{
         this.current.setCurrent(this.packageManager.getPackage(tag));
         return pack;
     }

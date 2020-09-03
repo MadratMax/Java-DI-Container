@@ -58,7 +58,18 @@ public class InstanceConfigurationBuilder<T> {
                 .collect(Collectors.toList());
 
         this.instances = filteredPOJOs;
-        this._instance = (Instance) stream.filter(x -> ((Instance) x).getType().equals(classType)).findFirst().orElse(null);
+        this._instance = (Instance) stream.filter(x -> ((Instance) x).getType().equals(classType)).findAny().orElse(null);
+        this.instanceManager.setCurrent(this._instance);
+        return this;
+    }
+
+    public InstanceConfigurationBuilder byInterface(Class<T> iFaceType){
+        Predicate<Instance> filterPredicate = item -> ((Instance) item).isInterfaceImplemented(iFaceType);
+
+        this.instances = this.instances.stream()
+                .filter(filterPredicate)
+                .collect(Collectors.toList());
+        this._instance = (Instance) stream.filter(x -> ((Instance) x).isInterfaceImplemented(iFaceType)).findAny().orElse(null);
         this.instanceManager.setCurrent(this._instance);
         return this;
     }
