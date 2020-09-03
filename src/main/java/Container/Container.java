@@ -2,6 +2,7 @@ package Container;
 
 import Instance.Instance;
 import Instance.InstanceManager;
+import PackageManager.InstancePackageProvider;
 import SearchEngine.Find;
 
 import java.util.ArrayList;
@@ -43,14 +44,12 @@ public class Container <T> implements IContainer<T> {
     }
 
     @Override
-    public Instance registerInstance(T instance){
+    public InstanceManager registerInstance(T instance){
         if(this.instancesAdded == this.containerSize)
             throw new ArrayIndexOutOfBoundsException("Exceeded Container size: " + this.containerSize);
 
-        Instance newInstance = this.instanceManager.addInstance(instance);
         instancesAdded++;
-
-        return newInstance;
+        return this.instanceManager.addInstance(instance);
     }
 
     @Override
@@ -111,7 +110,7 @@ public class Container <T> implements IContainer<T> {
 
     @Override
     public Find find(){
-        return new Find();
+        return this.instanceManager.find();
     }
 
     @Override
@@ -121,5 +120,10 @@ public class Container <T> implements IContainer<T> {
         this.instancesAdded = 0;
         this.instanceManager = new InstanceManager<T>(this);
         this.extractor = new Extractor<T>(this.instanceManager);
+    }
+
+    @Override
+    public InstancePackageProvider packageProvider() {
+        return this.instanceManager.getPackageProvider();
     }
 }

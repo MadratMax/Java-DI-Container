@@ -25,8 +25,4 @@ public class Siblings{
     public int getCount(){
         return this.count;
     }
-
-    public void updatePriority(int priority){
-        Configurator.updatePriority(this.siblings, priority);
-    }
 }

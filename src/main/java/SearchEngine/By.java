@@ -1,13 +1,17 @@
 package SearchEngine;
 
+import Instance.InstanceManager;
+
 import java.lang.reflect.Type;
 
-public class By {
+public class By<T> {
 
     private final InstanceConfigurationBuilder builder;
+    private InstanceManager instanceManager;
 
     public By(InstanceConfigurationBuilder builder){
         this.builder = builder;
+        this.instanceManager = instanceManager;
     }
 
     public SearchField by(){
@@ -30,7 +34,7 @@ public class By {
             return this.builder.byPriority(priority);
         }
 
-        public InstanceConfigurationBuilder id(int id){
+        public InstanceConfigurationBuilder id(String id){
             return this.builder.byId(id);
         }
 
@@ -38,8 +42,8 @@ public class By {
             return this.builder.byName(name);
         }
 
-        public InstanceConfigurationBuilder type(Type type){
-            return this.builder.byType(type);
+        public InstanceConfigurationBuilder type(Class<T> classType){
+            return this.builder.byType(classType);
         }
 
         public InstanceConfigurationBuilder lowPriority(){

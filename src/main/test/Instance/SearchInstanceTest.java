@@ -11,11 +11,9 @@ import java.util.*;
 public class SearchInstanceTest {
 
     private final IContainer container;
-    private final InstanceManager instanceManager;
 
     public SearchInstanceTest() {
         this.container = new Container(3);
-        this.instanceManager = new InstanceManager(this.container);
     }
 
     @Test
@@ -67,10 +65,10 @@ public class SearchInstanceTest {
         Class instClass = i3.getClass();
 
         Instance i = (Instance) Arrays.stream(this.container.getInstancesByClass(instClass).toArray()).reduce((a, b) -> b).orElse(null);
-        i.setId(3232);
+        i.setId("3232");
 
         List<Instance> instancesByClass = this.container.getInstancesByClass(i3.getClass());
-        Instance iById = this.container.find().in(instancesByClass).by().id(3232).instance();
+        Instance iById = this.container.find().in(instancesByClass).by().id("3232").instance();
         assertNotNull(iById, "failed to find instance by id");
     }
 
@@ -105,9 +103,9 @@ public class SearchInstanceTest {
         List<Instance> instancesByInterface = this.container.getInstancesByInterface(iFace);
 
         Instance i = (Instance) Arrays.stream(this.container.getInstancesByInterface(iFace).toArray()).reduce((a, b) -> b).orElse(null);
-        i.setId(3232);
+        i.setId("3232");
 
-        Instance iById = this.container.find().in(instancesByInterface).by().id(3232).instance();
+        Instance iById = this.container.find().in(instancesByInterface).by().id("3232").instance();
         assertNotNull(iById, "failed to find instance by id");
     }
 }

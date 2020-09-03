@@ -12,11 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class InstanceManagerTest {
 
     private final IContainer container;
-    private final InstanceManager instanceManager;
 
     public InstanceManagerTest() {
         this.container = new Container(2);
-        this.instanceManager = new InstanceManager(this.container);
+
     }
 
     @Test

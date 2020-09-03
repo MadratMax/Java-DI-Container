@@ -13,11 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SiblingsTest {
 
     private final IContainer<Object> container;
-    private final InstanceManager instanceManager;
 
     public SiblingsTest(){
         this.container = new Container<>(4);
-        this.instanceManager = new InstanceManager(this.container);
     }
 
     @Test

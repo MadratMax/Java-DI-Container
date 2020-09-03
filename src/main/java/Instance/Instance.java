@@ -1,16 +1,15 @@
 package Instance;
 
-import SearchEngine.Find;
-
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.UUID;
 
 public class Instance<T> {
 
-    private int id;
+    private String id;
     private boolean isInvoked;
     private int invokeCount;
     private Type type;
@@ -24,11 +23,10 @@ public class Instance<T> {
     public Instance(T coreInstance){
         if(coreInstance != null)
         {
-            this.id = coreInstance.hashCode();
+            this.id = UUID.randomUUID().toString();
             this.type = coreInstance.getClass();
             this.siblings = new Siblings();
             this.date = new SimpleDateFormat("yyyyMMdd_HHmmssms").format(Calendar.getInstance().getTime());
-            this.tag = Integer.toString(this.priority);
             this.coreInstance = coreInstance;
             this.implementedIFaces = this.getImplementedInterfaces();
         }
@@ -50,7 +48,7 @@ public class Instance<T> {
         return this.priority;
     }
 
-    public int getId(){
+    public String getId(){
         return this.id;
     }
 
@@ -72,7 +70,7 @@ public class Instance<T> {
         return this.coreInstance;
     }
 
-    public Instance setId(int id){
+    public Instance setId(String id){
         this.id = id;
         return this;
     }
@@ -83,13 +81,16 @@ public class Instance<T> {
 
         this.priority = priority;
 
-        int priorityExtender = this.siblings.getCount();
+        Integer priorityExtender = this.siblings.getCount();
         Instance lastEmptyInstance = null;
-        Instance samePriorityInstance = new Find().in(siblings.get()).by().priority(priority).instance();
+        //Instance samePriorityInstance = new Find().in(siblings.get()).by().priority(priority).instance();
+        Instance samePriorityInstance =
+                (Instance) siblings.get().stream().filter(x -> ((Instance) x).getPriority() == priority).findFirst().orElse(null);
 
         if(samePriorityInstance != null){
             while (samePriorityInstance.getPriority() == priority){
-                lastEmptyInstance = new Find().in(siblings.get()).by().priority(priorityExtender).instance();
+                Integer ext = priorityExtender;
+                lastEmptyInstance = (Instance) siblings.get().stream().filter(x -> ((Instance) x).getPriority() == ext).findFirst().orElse(null);
 
                 if(lastEmptyInstance == null){
                     samePriorityInstance.setPriority(priorityExtender++);
@@ -122,7 +123,7 @@ public class Instance<T> {
         return this.siblings.getCount();
     }
 
-    private Class[] getImplementedInterfaces(){
+    public Class[] getImplementedInterfaces(){
         return this.coreInstance.getClass().getInterfaces();
     }
 }

@@ -12,11 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class ContainerTest {
 
     private IContainer container;
-    private InstanceManager instanceManager;
 
     public ContainerTest() {
         this.container = new Container(2);
-        this.instanceManager = new InstanceManager(this.container);
     }
 
     @Test
