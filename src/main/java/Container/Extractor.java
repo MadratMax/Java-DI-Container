@@ -46,6 +46,6 @@ public class Extractor <T> implements IExtractor<T>{
     }
 
     private T getNextInstance(List<Instance> instancesByIFace) {
-        return (T) this.instanceManager.getNextInstanceByIFaceType(instancesByIFace).get();
+        return (T) this.instanceManager.getNextInstanceByIFaceType(instancesByIFace).getCoreInstance();
     }
 }

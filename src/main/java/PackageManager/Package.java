@@ -1,6 +1,5 @@
 package PackageManager;
 
-import Instance.Instance;
 import SearchEngine.Find;
 
 public class Package<T>{
@@ -16,13 +15,13 @@ public class Package<T>{
         if(this.current == null){
             throw new NullPointerException("Package tag was not defined");
         }
-        return (T) this.find.in(this.current.getCurrent().getInstanceList()).by().interfaceType(interfaceType).byHighPriority().instance().get();
+        return (T) this.find.in(this.current.getCurrent().getInstanceList()).by().interfaceType(interfaceType).byHighPriority().instance().getCoreInstance();
     }
 
     public T getInstance(){
         if(this.current == null){
             throw new NullPointerException("Package tag was not defined");
         }
-        return (T) this.find.in(this.current.getCurrent().getInstanceList()).by().highPriority().instance().get();
+        return (T) this.find.in(this.current.getCurrent().getInstanceList()).by().highPriority().instance().getCoreInstance();
     }
 }

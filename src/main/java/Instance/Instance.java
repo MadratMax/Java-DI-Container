@@ -68,7 +68,7 @@ public class Instance<T> {
         return this.type;
     }
 
-    public T get(){
+    public T getCoreInstance(){
         this.invokeCount++;
         isInvoked = true;
         return this.coreInstance;

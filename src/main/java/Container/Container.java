@@ -82,7 +82,7 @@ public class Container <T> implements IContainer<T> {
             throw new NullPointerException(
                     "Failed to extract instance that implements " + interfaceType.toString() + ".");
 
-        return (T) i.get();
+        return (T) i.getCoreInstance();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class Container <T> implements IContainer<T> {
 
         for (Instance i :
                 instancesByIFace) {
-            coreInstanceList.add((T) i.get());
+            coreInstanceList.add((T) i.getCoreInstance());
         }
 
         return coreInstanceList;

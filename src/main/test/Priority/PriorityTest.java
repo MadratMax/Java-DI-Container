@@ -162,7 +162,7 @@ public class PriorityTest {
                 this.container.find().in(container.getInstancesByClass(Logger.class)).by().priority(0).instance();
 
         assertEquals(
-                i3.get(), majorPriorityInstance.get(),
+                i3.getCoreInstance(), majorPriorityInstance.getCoreInstance(),
                 "failed to update priority");
 
         int minPriority =
