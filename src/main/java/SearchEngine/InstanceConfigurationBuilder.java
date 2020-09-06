@@ -23,30 +23,26 @@ public class InstanceConfigurationBuilder<T> {
     }
 
     public Instance instance(){
-        return this.instanceManager.getInstance();
+        return this._instance;
     }
 
     public InstanceConfigurationBuilder byTag(String tag){
         this._instance = (Instance) stream.filter(x -> ((Instance) x).getTag() == tag).findFirst().orElse(null);
-        this.instanceManager.setCurrent(this._instance);
         return this;
     }
 
     public InstanceConfigurationBuilder byPriority(int priority){
         this._instance = (Instance) stream.filter(x -> ((Instance) x).getPriority() == priority).findFirst().orElse(null);
-        this.instanceManager.setCurrent(this._instance);
         return this;
     }
 
     public InstanceConfigurationBuilder byId(String id){
         this._instance = (Instance) stream.filter(x -> ((Instance) x).getId() == id).findFirst().orElse(null);
-        this.instanceManager.setCurrent(this._instance);
         return this;
     }
 
     public InstanceConfigurationBuilder byName(String name){
         this._instance = (Instance) stream.filter(x -> ((Instance) x).getName() == name).findFirst().orElse(null);
-        this.instanceManager.setCurrent(this._instance);
         return this;
     }
 
@@ -59,7 +55,6 @@ public class InstanceConfigurationBuilder<T> {
 
         this.instances = filteredPOJOs;
         this._instance = (Instance) stream.filter(x -> ((Instance) x).getType().equals(classType)).findAny().orElse(null);
-        this.instanceManager.setCurrent(this._instance);
         return this;
     }
 
@@ -70,28 +65,24 @@ public class InstanceConfigurationBuilder<T> {
                 .filter(filterPredicate)
                 .collect(Collectors.toList());
         this._instance = (Instance) stream.filter(x -> ((Instance) x).isInterfaceImplemented(iFaceType)).findAny().orElse(null);
-        this.instanceManager.setCurrent(this._instance);
         return this;
     }
 
     public InstanceConfigurationBuilder byLowPriority(){
         this._instance =
                 this.instances.stream().max(Comparator.comparing(Instance::getPriority)).orElse(null);
-        this.instanceManager.setCurrent(this._instance);
         return this;
     }
 
     public InstanceConfigurationBuilder byHighPriority(){
         this._instance =
                 this.instances.stream().min(Comparator.comparing(Instance::getPriority)).orElse(null);
-        this.instanceManager.setCurrent(this._instance);
         return this;
     }
 
     public InstanceConfigurationBuilder byMinInvokeCount(){
         this._instance =
                 this.instances.stream().min(Comparator.comparing(Instance::getInvokeCount)).orElse(null);
-        this.instanceManager.setCurrent(this._instance);
         return this;
     }
 }

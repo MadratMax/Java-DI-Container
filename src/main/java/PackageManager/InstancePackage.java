@@ -1,8 +1,8 @@
 package PackageManager;
 
 import Instance.Instance;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class InstancePackage<T> {
 
@@ -46,5 +46,10 @@ public class InstancePackage<T> {
 
         this.tag = instance.getTag();
         this.packageSize++;
+    }
+
+    public void remove(Instance instance){
+        this.instanceList.remove(instance);
+        this.packageSize--;
     }
 }

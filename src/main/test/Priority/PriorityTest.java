@@ -3,7 +3,6 @@ package Priority;
 import Container.Container;
 import Container.IContainer;
 import Instance.Instance;
-import Instance.InstanceManager;
 import TestData.DifLogger;
 import TestData.ILogger;
 import TestData.Logger;
@@ -59,9 +58,9 @@ public class PriorityTest {
         ILogger l2 = new Logger("l2");
         ILogger difL5 = new DifLogger("difLogger");
 
-        Instance difL = this.container.registerInstance(difL5).setTag("difL5").getInstance(); // priority 0
-        Instance i1 = this.container.registerInstance(l1).setTag("l1").getInstance();         // priority 0
-        Instance i2 = this.container.registerInstance(l1).setTag("l2").getInstance();         // priority 1
+        Instance difL = this.container.registerInstance(difL5).setTag("difL5"); // priority 0
+        Instance i1 = this.container.registerInstance(l1).setTag("l1");         // priority 0
+        Instance i2 = this.container.registerInstance(l1).setTag("l2");         // priority 1
 
         difL.setPriority(0);
         assertTrue(difL.getPriority() == 0, "expected priority: 0, but was " + difL.getPriority());
@@ -82,11 +81,11 @@ public class PriorityTest {
         ILogger l4 = new Logger("l4");
         ILogger difL5 = new DifLogger("difLogger");
 
-        Instance difL = this.container.registerInstance(difL5).setTag("difL5").getInstance(); // priority 0
-        Instance i1 = this.container.registerInstance(l1).setTag("l1").getInstance(); // priority 0
-        Instance i2 = this.container.registerInstance(l2).setTag("l2").getInstance(); // priority 1
-        Instance i3 = this.container.registerInstance(l3).setTag("l3").getInstance(); // priority 2
-        Instance i4 = this.container.registerInstance(l4).setTag("l4").getInstance(); // priority 3
+        Instance difL = this.container.registerInstance(difL5).setTag("difL5"); // priority 0
+        Instance i1 = this.container.registerInstance(l1).setTag("l1"); // priority 0
+        Instance i2 = this.container.registerInstance(l2).setTag("l2"); // priority 1
+        Instance i3 = this.container.registerInstance(l3).setTag("l3"); // priority 2
+        Instance i4 = this.container.registerInstance(l4).setTag("l4"); // priority 3
 
         i4.setPriority(1);
         assertTrue(i2.getPriority() == 3, "expected priority: 3, but was " + i2.getPriority());
@@ -100,10 +99,10 @@ public class PriorityTest {
         ILogger l3 = new Logger("l3");
         ILogger l4 = new Logger("l4");
 
-        Instance i1 = this.container.registerInstance(l1).setTag("l1").getInstance(); // default priority: 0
-        Instance i2 = this.container.registerInstance(l2).setTag("l2").getInstance(); // default priority: 1
-        Instance i3 = this.container.registerInstance(l3).setTag("l3").getInstance(); // default priority: 2
-        Instance i4 = this.container.registerInstance(l4).setTag("l4").getInstance(); // default priority: 3
+        Instance i1 = this.container.registerInstance(l1).setTag("l1"); // default priority: 0
+        Instance i2 = this.container.registerInstance(l2).setTag("l2"); // default priority: 1
+        Instance i3 = this.container.registerInstance(l3).setTag("l3"); // default priority: 2
+        Instance i4 = this.container.registerInstance(l4).setTag("l4"); // default priority: 3
 
         i1.setPriority(3);
         assertTrue(i4.getPriority() == 4, "expected priority: 4, but was " + i4.getPriority());
@@ -120,10 +119,10 @@ public class PriorityTest {
         ILogger l3 = new Logger("l3");
         ILogger l4 = new Logger("l4");
 
-        Instance i1 = this.container.registerInstance(l1).setTag("l1").getInstance(); // default priority: 0
-        Instance i2 = this.container.registerInstance(l2).setTag("l2").getInstance(); // default priority: 1
-        Instance i3 = this.container.registerInstance(l3).setTag("l3").getInstance(); // default priority: 2
-        Instance i4 = this.container.registerInstance(l4).setTag("l4").getInstance(); // default priority: 3
+        Instance i1 = this.container.registerInstance(l1).setTag("l1"); // default priority: 0
+        Instance i2 = this.container.registerInstance(l2).setTag("l2"); // default priority: 1
+        Instance i3 = this.container.registerInstance(l3).setTag("l3"); // default priority: 2
+        Instance i4 = this.container.registerInstance(l4).setTag("l4"); // default priority: 3
 
         i1.setPriority(6);
         i2.setPriority(5);
@@ -152,10 +151,10 @@ public class PriorityTest {
         ILogger l3 = new Logger("l3");
         ILogger l4 = new Logger("l4");
 
-        Instance i1 = this.container.registerInstance(l1).setTag("l1").getInstance(); // default priority: 0
-        Instance i2 = this.container.registerInstance(l2).setTag("l2").getInstance(); // default priority: 1
-        Instance i3 = this.container.registerInstance(l3).setTag("l3").getInstance(); // default priority: 2
-        Instance i4 = this.container.registerInstance(l4).setTag("l4").getInstance(); // default priority: 3
+        Instance i1 = this.container.registerInstance(l1).setTag("l1"); // default priority: 0
+        Instance i2 = this.container.registerInstance(l2).setTag("l2"); // default priority: 1
+        Instance i3 = this.container.registerInstance(l3).setTag("l3"); // default priority: 2
+        Instance i4 = this.container.registerInstance(l4).setTag("l4"); // default priority: 3
 
         i3.setPriority(0);
 

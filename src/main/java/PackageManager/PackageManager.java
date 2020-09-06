@@ -19,7 +19,7 @@ public class PackageManager {
         this.addedPackages = 0;
     }
 
-    public void define(Instance instance){
+    public String define(Instance instance, String oldTag){
         if(!this.ids.contains(instance.getId())){
             this.ids.add(instance.getId());
 
@@ -31,8 +31,11 @@ public class PackageManager {
             }
         }
         else{
+            this.findPackageByTag(oldTag).remove(instance);
             this.createPackage(instance.getTag(), instance);
         }
+
+        return instance.getTag();
     }
 
     public InstancePackage getPackage(String tag){

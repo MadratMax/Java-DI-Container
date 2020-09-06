@@ -29,19 +29,20 @@ public class Main<T> {
         container.registerInstance(l1).setTag("DEV");//.setPriority(0);//.setPriority(4);//.setPriority(4);//.Priority(4);
         container.registerInstance(l2).setTag("DEV");//.setPriority(0);//.setPriority(3);//.setPriority(3);
         container.registerInstance(l3).setTag("QA");//.setPriority(0);//.setPriority(0);
-        container.registerInstance(l4).setTag("QA").setPriority(0);//.setPriority(0);//.Priority(5);
+        container.registerInstance(l4).setTag("QA");//.setPriority(0);//.Priority(5);
         container.registerInstance(l5).setTag("l5");//setPriority(0);//.Priority(6);
         container.registerInstance(noIface).setTag("noIFace");//setPriority(0);//.Priority(6);
-        InstanceManager ll22 = container.registerInstance(logger22).setTag("QA");//setPriority(0);//.Priority(6);
-        container.registerInstance(logger2).setTag("QA").setPriority(0);//.Priority(6);
+        Instance ll22 = container.registerInstance(logger22).setTag("QA").setPriority(0);//setPriority(0);//.Priority(6);
+        container.registerInstance(logger2).setTag("QA");//.setPriority(0);//.Priority(6);
 
 
         ((ITestIFace) container.packageProvider().getPackage("QA").getInstance(ITestIFace.class)).write();
         ((ILogger) container.packageProvider().getPackage("dev").getInstance()).write();
         ((NoIFaceClass) container.packageProvider().getPackage("noIFace").getInstance()).write();
 
-        ll22.setTag("33");
+        ll22.setTag("PROD");
         ((ITestIFace) container.packageProvider().getPackage("QA").getInstance(ITestIFace.class)).write();
+        ((ITestIFace) container.packageProvider().getPackage("PROD").getInstance(ITestIFace.class)).write();
 
         //((NoIFaceClass) container.getInstance(NoIFaceClass.class)).write();
         //container.activateSiblings();

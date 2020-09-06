@@ -1,5 +1,7 @@
 package Instance;
 
+import PackageManager.PackageManager;
+
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.UUID;
 
 public class Instance<T> {
 
+    private PackageManager packageManager;
     private String id;
     private boolean isInvoked;
     private int invokeCount;
@@ -20,9 +23,10 @@ public class Instance<T> {
     private String tag;
     private Class[] implementedIFaces;
 
-    public Instance(T coreInstance){
+    public Instance(T coreInstance, PackageManager packageManager){
         if(coreInstance != null)
         {
+            this.packageManager = packageManager;
             this.id = UUID.randomUUID().toString();
             this.type = coreInstance.getClass();
             this.siblings = new Siblings();
@@ -103,7 +107,9 @@ public class Instance<T> {
     }
 
     public Instance setTag(String tag){
+        String oldTag = this.tag;
         this.tag = tag;
+        this.packageManager.define(this, oldTag);
         return this;
     }
 

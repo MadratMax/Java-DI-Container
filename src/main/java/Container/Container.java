@@ -44,7 +44,7 @@ public class Container <T> implements IContainer<T> {
     }
 
     @Override
-    public InstanceManager registerInstance(T instance){
+    public Instance registerInstance(T instance){
         if(this.instancesAdded == this.containerSize)
             throw new ArrayIndexOutOfBoundsException("Exceeded Container size: " + this.containerSize);
 

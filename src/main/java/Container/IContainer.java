@@ -12,7 +12,7 @@ public interface IContainer <T> {
     void activateSiblings();
     void deactivateSiblings();
     int getSize();
-    InstanceManager registerInstance(T instance);
+    Instance registerInstance(T instance);
     InstanceSupply<T> getSupply();
     InstanceSupply<T> getSupply(Class<T> iFaceType);
     T getInstance(Class<T> classType);

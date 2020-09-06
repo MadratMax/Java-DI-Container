@@ -18,7 +18,6 @@ public class InstanceManager <T> {
     private final Instance[] instances;
     private final TypeSet typeSet;
     private int lastAddedIndex;
-    private Instance current;
 
     public InstanceManager(
             IContainer container){
@@ -34,12 +33,8 @@ public class InstanceManager <T> {
         return this.packageProvider;
     }
 
-    public Instance instance() throws NullPointerException{
-        return this.current;
-    }
-
-    public InstanceManager addInstance(T instance){
-        Instance<T> newInstance = new Instance<T>(instance);
+    public Instance addInstance(T instance){
+        Instance<T> newInstance = new Instance<T>(instance, this.packageManager);
         this.instances[lastAddedIndex] = newInstance;
         Type instanceType = this.instances[lastAddedIndex].getType();
         boolean typeAdded = this.typeSet.addType(instanceType, newInstance);
@@ -47,45 +42,8 @@ public class InstanceManager <T> {
 
         if(!typeAdded)
             this.setSiblingRelation(instanceType, newInstance);
-        this.current = newInstance;
-        return this;
-    }
 
-    public InstanceManager setCurrent(Instance instance){
-        this.current = instance;
-        return this;
-    }
-
-    public Instance getInstance(){
-        return this.current;
-    }
-
-    public String getTag(){
-        return this.current.getTag();
-    }
-
-    public InstanceManager setTag(String tag){
-        this.current.setTag(tag);
-        this.packageManager.define(this.current);
-        return this;
-    }
-
-    public int getPriority(){
-        return this.current.getPriority();
-    }
-
-    public InstanceManager setPriority(int priority){
-        this.current.setPriority(priority);
-        return this;
-    }
-
-    public String getId(){
-        return this.current.getId();
-    }
-
-    public InstanceManager setId(String id){
-        this.current.setId(id);
-        return this;
+        return newInstance;
     }
 
     public Find find(){
